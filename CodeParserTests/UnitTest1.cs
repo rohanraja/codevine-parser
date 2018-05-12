@@ -13,7 +13,7 @@ namespace CodeParserTests
 		[TestInitialize]
         public void setUp()
 		{
-			testDataReader = DataReader.GetTestReader();
+			testDataReader = TestDummyDataReader.GetTestReader();
 			Assert.IsTrue(testDataReader.GetMainFile().Contains("void Main"));
 		}
 

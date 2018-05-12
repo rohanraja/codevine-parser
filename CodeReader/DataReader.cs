@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace CodeReader
@@ -6,16 +7,7 @@ namespace CodeReader
     public class DataReader
     {
 
-		private static string testProjectPath = @"/Users/rohan/code/codevine_parser/CodeVine_Parser/TestCSharpProject";
-
-
 		public string ProjectPath;
-
-		public static DataReader GetTestReader()
-		{
-			return new DataReader(testProjectPath);
-			
-		}
 
         public string GetMainFile()
 		{
@@ -34,6 +26,5 @@ namespace CodeReader
 		{
 			ProjectPath = projectPath;
 		}
-
     }
 }

@@ -6,7 +6,7 @@ namespace CodeReader
     {
         static void Main(string[] args)
         {
-			var dataReader = DataReader.GetTestReader();
+			var dataReader = TestDummyDataReader.GetTestReader();
 			string outp = dataReader.GetMainFile();
 
             Console.WriteLine(outp);
