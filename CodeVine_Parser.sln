@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodePraser", "CodePraser\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCSharpProject", "TestCSharpProject\TestCSharpProject.csproj", "{F06595A4-26F5-4C55-8B2D-6FF73E971785}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeReader", "CodeReader\CodeReader.csproj", "{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{F06595A4-26F5-4C55-8B2D-6FF73E971785}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F06595A4-26F5-4C55-8B2D-6FF73E971785}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F06595A4-26F5-4C55-8B2D-6FF73E971785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

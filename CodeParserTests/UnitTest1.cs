@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CodePraser;
+using CodeReader;
 
 namespace CodeParserTests
 {
@@ -7,12 +8,12 @@ namespace CodeParserTests
     public class UnitTest1
     {
 
-		private TestingDataReader testDataReader;
+		private DataReader testDataReader;
 
 		[TestInitialize]
         public void setUp()
 		{
-			testDataReader = TestingDataReader.GetReader();
+			testDataReader = DataReader.GetTestReader();
 			Assert.IsTrue(testDataReader.GetMainFile().Contains("void Main"));
 		}
 

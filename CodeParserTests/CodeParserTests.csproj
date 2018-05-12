@@ -14,5 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodePraser\CodePraser.csproj" />
+    <ProjectReference Include="..\CodeReader\CodeReader.csproj" />
   </ItemGroup>
 </Project>
