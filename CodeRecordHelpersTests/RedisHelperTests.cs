@@ -11,8 +11,7 @@ namespace CodeRecordHelpersTests
 		[TestInitialize]
         public void InitializeRedisInstance()
 		{
-			redisHelper = new RedisHelper();
-			redisHelper.Connect();
+			redisHelper = RedisHelper.GetConnectedRedisHelper();
 			Assert.IsTrue(redisHelper.IsConnected());
 
 		}

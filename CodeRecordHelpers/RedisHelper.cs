@@ -11,11 +11,16 @@ namespace CodeRecordHelpers
         {
         }
 
-        public void AddToQueue(string key, string jsonVal)
+		public static RedisHelper GetConnectedRedisHelper()
 		{
+			var redisHelper = new RedisHelper();
+            redisHelper.Connect();
+			return redisHelper;
+		}
 
+		public void AddToQueue(string key, string jsonVal)
+		{
 			var db = redis.GetDatabase();
-
 			db.ListLeftPush(key, jsonVal);
 		}
 
