@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CodeRecordHelpersTests
 {
     [TestClass]
-    public class RedisHelpersTest
+    public class RedisHelperTests
     {
 		RedisHelper redisHelper;
 
