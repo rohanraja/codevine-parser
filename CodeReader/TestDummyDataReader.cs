@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace CodeReader
 {
 	public class TestDummyDataReader : DataReader
@@ -9,10 +10,20 @@ namespace CodeReader
         {
         }
 
+        public string GetClassA()
+		{
+			return GetContentsOfFileAtRoot("ClassA.cs");
+		}
+
 		public static TestDummyDataReader GetTestReader()
         {
 			return new TestDummyDataReader(testProjectPath);
 
         }
-    }
+
+		public override string GetCsProjFname()
+		{
+			return "TestCSharpProject.csproj";
+		}
+	}
 }

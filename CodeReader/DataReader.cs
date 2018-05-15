@@ -11,11 +11,17 @@ namespace CodeReader
 
         public string GetMainFile()
 		{
-			string mainProgPath = GetFullPath("Program.cs");
-			return File.ReadAllText(mainProgPath);
+			return GetContentsOfFileAtRoot("Program.cs");
 		}
 
-		private string GetFullPath(string fname)
+        public string GetContentsOfFileAtRoot(string fname)
+		{
+			string fPath = GetFullPath(fname);
+			return File.ReadAllText(fPath);
+
+		}
+
+		public string GetFullPath(string fname)
 		{
 			string fpath = ProjectPath + "/" + fname;
 			return fpath;
@@ -25,6 +31,17 @@ namespace CodeReader
 		public DataReader(string projectPath)
 		{
 			ProjectPath = projectPath;
+		}
+
+        public string GetCSProjContents()
+		{
+			string fname = GetCsProjFname();
+			return GetContentsOfFileAtRoot(fname);
+		}
+
+		public virtual string GetCsProjFname()
+		{
+			throw new NotImplementedException() ;
 		}
     }
 }
