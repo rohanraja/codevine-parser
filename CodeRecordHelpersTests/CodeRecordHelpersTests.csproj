@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CodeRecordHelpers\CodeRecordHelpers.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="RedisDispatcherQueue.cs" />
+  </ItemGroup>
 </Project>

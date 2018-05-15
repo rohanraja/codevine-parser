@@ -11,17 +11,23 @@ namespace CodeRecordHelpersTests
 		[TestInitialize]
         public void InitializeRedisInstance()
 		{
-			
+			redisHelper = new RedisHelper();
+			redisHelper.Connect();
+			Assert.IsTrue(redisHelper.IsConnected());
+
 		}
+
 		[TestCleanup]
         public void DisposeRedisInstance()
         {
-
+			redisHelper.Dispose();
         }
 
         [TestMethod]
-        public void TestEstablishingRedisConnection()
+        public void AddingToQueue()
         {
+			redisHelper.AddToQueue("testK", "TestVal1");
+			redisHelper.AddToQueue("testK", "TestVal2");
         }
     }
 }
