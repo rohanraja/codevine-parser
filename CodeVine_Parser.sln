@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCSharpProject", "TestCS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeReader", "CodeReader\CodeReader.csproj", "{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeRecordHelpers", "CodeRecordHelpers\CodeRecordHelpers.csproj", "{BA78E3B3-C50A-46C1-83B5-62E051F0727A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeRecordHelpersTests", "CodeRecordHelpersTests\CodeRecordHelpersTests.csproj", "{DD6A6415-132B-4C3E-AA32-11F7A5996A0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +41,13 @@ Global
 		{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2810E03F-3A4C-497B-82BA-3A81CDE9A4B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA78E3B3-C50A-46C1-83B5-62E051F0727A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA78E3B3-C50A-46C1-83B5-62E051F0727A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA78E3B3-C50A-46C1-83B5-62E051F0727A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA78E3B3-C50A-46C1-83B5-62E051F0727A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD6A6415-132B-4C3E-AA32-11F7A5996A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6A6415-132B-4C3E-AA32-11F7A5996A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6A6415-132B-4C3E-AA32-11F7A5996A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6A6415-132B-4C3E-AA32-11F7A5996A0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
