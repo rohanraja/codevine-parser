@@ -43,18 +43,24 @@ namespace CodeRecordHelpers
 
 
 		public void LogLineRun(Guid mrid, int lineNo, string timeStamp)
-        {
-			var codeRunEvent = new CodeRunEventHolder();
+		{
 
 			var payload = new LineExecPayloadHolder(mrid, lineNo, timeStamp);
+			var eventType = "LINE_EXEC";
 
+			DispatchCodeRunEvent(payload, eventType);
+            
+		}
+
+		private void DispatchCodeRunEvent(object payload, string eventType)
+		{
+			var codeRunEvent = new CodeRunEventHolder();
 			codeRunEvent.PayLoad = jsonHelper.ToJSON(payload);
-			codeRunEvent.EventType = "LINE_EXEC";
+			codeRunEvent.EventType = eventType;
 			codeRunEvent.CodeRunID = CodeRunID;
 
 			DispatchCodeRunEvent(codeRunEvent);
-
-        }
+		}
 
 		public void OnMethodEnter(Guid mrid, string v, string methodName)
         {

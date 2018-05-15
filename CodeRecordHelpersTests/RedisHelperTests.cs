@@ -22,7 +22,7 @@ namespace CodeRecordHelpersTests
 			redisHelper.Dispose();
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void AddingToQueue()
         {
 			redisHelper.AddToQueue("testK", "TestVal1");
