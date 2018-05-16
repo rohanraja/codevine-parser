@@ -4,7 +4,8 @@ using CodeRecordHelpers.payloadHolders;
 
 namespace CodeRecordHelpers
 {
-    public class MethodHelpers
+
+	public class MethodHelpers
     {
 		private static MethodHelpers _instance;
 
@@ -28,14 +29,23 @@ namespace CodeRecordHelpers
 
 		private void DispatchCodeRunEvent(CodeRunEventHolder codeRunEvent)
         {
-            string message = jsonHelper.ToJSON(codeRunEvent);
+            //string message = jsonHelper.ToJSON(codeRunEvent);
             string key = "CODE_RUN_EVENTS";
+			key = string.Format("resque:queue:{0}", key);
+
+			ResqueMessage remsg = new ResqueMessage();
+			remsg.Class = "CodeRunEventProcessor";
+			remsg.args.Add(codeRunEvent.CodeRunID.ToString());
+			remsg.args.Add(codeRunEvent.EventType);
+			remsg.args.Add(codeRunEvent.PayLoad);
+
+			string message = jsonHelper.ToJSON(remsg);
 
             RedisMessage msg = new RedisMessage(key, message);
             messageDispatcher.DispatchMessage(msg);
         }
 
-		public string GetCurrentTimeStamp()
+		public static string GetCurrentTimeStamp()
         {
             return DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
                                             CultureInfo.InvariantCulture);

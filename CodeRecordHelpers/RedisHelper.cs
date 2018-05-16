@@ -21,7 +21,7 @@ namespace CodeRecordHelpers
 		public void AddToQueue(string key, string jsonVal)
 		{
 			var db = redis.GetDatabase();
-			db.ListLeftPush(key, jsonVal);
+			db.ListRightPush(key, jsonVal);
 		}
 
 		public void Connect()

@@ -34,14 +34,14 @@ namespace CodeRecordHelpersTests
 
 			mock.Verify(x => x.DispatchMessage(It.IsAny<RedisMessage>()), Times.Once());
 
-			Assert.AreEqual(msg.GetKey(), "CODE_RUN_EVENTS");
+			Assert.IsTrue(msg.GetKey().Contains("CODE_RUN_EVENTS"));
 			Assert.IsTrue(msg.GetMessage().Contains("95"));
 			Assert.IsTrue(msg.GetMessage().Contains("testDate"));
 			Assert.IsTrue(msg.GetMessage().Contains("LINE_EXEC"));
 
         }
 
-		//[TestMethod]
+		[TestMethod]
         public void TestLoggingLine_REDIS()
 		{
 			methodHelpers = MethodHelpers.Instance();

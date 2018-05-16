@@ -1,6 +1,7 @@
 ﻿using System;
 namespace CodeRecordHelpers
 {
+
     public class MessageDispatcher : IMessageDispatcher
 	{
 		RedisHelper redisHelper;
@@ -12,7 +13,9 @@ namespace CodeRecordHelpers
 
 		public void DispatchMessage(RedisMessage msg)
 		{
-			redisHelper.AddToQueue(msg.GetKey(), msg.GetMessage());
+			string key = msg.GetKey();
+
+			redisHelper.AddToQueue(key, msg.GetMessage());
 		}
 
     }
