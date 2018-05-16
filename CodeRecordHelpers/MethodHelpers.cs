@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using CodeRecordHelpers.payloadHolders;
 
@@ -27,7 +28,7 @@ namespace CodeRecordHelpers
             jsonHelper = new JsonHelper();
         }
 
-		private void DispatchCodeRunEvent(CodeRunEventHolder codeRunEvent)
+		private void DispatchCodeRunEvent_ToResque(List<string> args)
         {
             //string message = jsonHelper.ToJSON(codeRunEvent);
             string key = "CODE_RUN_EVENTS";
@@ -35,9 +36,7 @@ namespace CodeRecordHelpers
 
 			ResqueMessage remsg = new ResqueMessage();
 			remsg.Class = "CodeRunEventProcessor";
-			remsg.args.Add(codeRunEvent.CodeRunID.ToString());
-			remsg.args.Add(codeRunEvent.EventType);
-			remsg.args.Add(codeRunEvent.PayLoad);
+			remsg.args = args;
 
 			string message = jsonHelper.ToJSON(remsg);
 
@@ -64,12 +63,30 @@ namespace CodeRecordHelpers
 
 		private void DispatchCodeRunEvent(object payload, string eventType)
 		{
-			var codeRunEvent = new CodeRunEventHolder();
-			codeRunEvent.PayLoad = jsonHelper.ToJSON(payload);
-			codeRunEvent.EventType = eventType;
-			codeRunEvent.CodeRunID = CodeRunID;
+			string Payload = jsonHelper.ToJSON(payload);
 
-			DispatchCodeRunEvent(codeRunEvent);
+			var strArgs = new List<string> () { };
+			strArgs.Add(CodeRunID.ToString());
+            strArgs.Add(eventType);
+			strArgs.Add(Payload);
+
+			string key = "CODE_RUN_EVENTS";
+            key = string.Format("resque:queue:{0}", key);
+			string railsClassName = "CodeRunEventProcessor";
+
+			EnqueueResqueMessage(key, railsClassName, strArgs);
+		}
+
+		private void EnqueueResqueMessage(string key, string railsClassName, List<string> strArgs)
+		{
+
+            ResqueMessage remsg = new ResqueMessage();
+			remsg.Class = railsClassName;
+			remsg.args = strArgs;
+            string message = jsonHelper.ToJSON(remsg);
+
+            RedisMessage msg = new RedisMessage(key, message);
+            messageDispatcher.DispatchMessage(msg);
 		}
 
 		public void OnMethodEnter(Guid mrid, string v, string methodName)
