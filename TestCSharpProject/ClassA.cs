@@ -78,7 +78,7 @@ namespace TestCSharpProject
         Guid OnMethodEnter(string methodName)
 		{
 			Guid mrid = Guid.NewGuid();
-			MethodHelpers.Instance().OnMethodEnter(mrid, "ClassA.cs", methodName);
+			CodeHooks.Instance().OnMethodEnter(mrid, "ClassA.cs", methodName);
 			return mrid;
 		}
 

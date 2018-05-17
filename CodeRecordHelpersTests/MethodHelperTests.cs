@@ -7,7 +7,7 @@ namespace CodeRecordHelpersTests
     [TestClass]
     public class MethodHelperTests
     {
-		MethodHelpers methodHelpers;
+		CodeHooks methodHelpers;
 
 		[TestInitialize]
         public void Init()
@@ -28,7 +28,7 @@ namespace CodeRecordHelpersTests
 
 			mock.Setup(x => x.DispatchMessage(It.IsAny<RedisMessage>())).Callback( (RedisMessage pmsg) => msg = pmsg ) ;
 
-			methodHelpers = new MethodHelpers( mock.Object );
+			methodHelpers = new CodeHooks( mock.Object );
 
 			methodHelpers.LogLineRun(System.Guid.NewGuid(), 95, "testDate");
 
@@ -44,8 +44,10 @@ namespace CodeRecordHelpersTests
 		[TestMethod]
         public void TestLoggingLine_REDIS()
 		{
-			methodHelpers = MethodHelpers.Instance();
-			methodHelpers.LogLineRun(System.Guid.NewGuid(), 112, "09-04-1993");
+			methodHelpers = CodeHooks.Instance();
+			System.Guid mrid = System.Guid.NewGuid();
+			methodHelpers.OnMethodEnter(mrid, "newClass.cs", "MethodA");
+			methodHelpers.LogLineRun(mrid, 112, "09-04-1993");
 		}
     }
 }

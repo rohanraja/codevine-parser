@@ -31,7 +31,7 @@ namespace TestCSharpProject
 		Guid OnMethodEnter(string methodName)
         {
             Guid mrid = Guid.NewGuid();
-            MethodHelpers.Instance().OnMethodEnter(mrid, "TestCSharpProject.ClassB", methodName);
+            CodeHooks.Instance().OnMethodEnter(mrid, "TestCSharpProject.ClassB", methodName);
             return mrid;
         }
 
