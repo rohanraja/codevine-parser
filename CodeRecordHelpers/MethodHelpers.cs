@@ -51,15 +51,6 @@ namespace CodeRecordHelpers
         }
 
 
-		public void LogLineRun(Guid mrid, int lineNo, string timeStamp)
-		{
-
-			var payload = new LineExecPayloadHolder(mrid, lineNo, timeStamp);
-			var eventType = "LINE_EXEC";
-
-			DispatchCodeRunEvent(payload, eventType);
-            
-		}
 
 		private void DispatchCodeRunEvent(object payload, string eventType)
 		{
@@ -89,10 +80,29 @@ namespace CodeRecordHelpers
             messageDispatcher.DispatchMessage(msg);
 		}
 
-		public void OnMethodEnter(Guid mrid, string v, string methodName)
+		public void OnMethodEnter(Guid mrid, string relativeFilePath, string methodName)
         {
+			//var payload = new LineExecPayloadHolder(mrid, lineNo, timeStamp);
+            //var eventType = "METHOD_ENTER";
+
+            //DispatchCodeRunEvent(payload, eventType);
         }
 
+		public void LogLineRun(Guid mrid, int lineNo, string timeStamp)
+        {
+
+            //var payload = new LineExecPayloadHolder(mrid, lineNo, timeStamp);
+            var eventType = "LINE_EXEC";
+
+			var payload = new List<string>() { };
+			payload.Add(mrid.ToString());
+			payload.Add(lineNo.ToString());
+			payload.Add(timeStamp);
+
+
+            DispatchCodeRunEvent(payload, eventType);
+
+        }
 
 	}
 }

@@ -45,7 +45,7 @@ namespace CodeRecordHelpersTests
         public void TestLoggingLine_REDIS()
 		{
 			methodHelpers = MethodHelpers.Instance();
-			methodHelpers.LogLineRun(System.Guid.NewGuid(), 95, "testDate");
+			methodHelpers.LogLineRun(System.Guid.NewGuid(), 112, "09-04-1993");
 		}
     }
 }
