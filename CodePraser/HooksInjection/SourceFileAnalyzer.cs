@@ -20,7 +20,6 @@ namespace CodePraser.HooksInjection
         void Parse()
 		{
 			syntaxTree = CSharpSyntaxTree.ParseText(SourceFile.GetCode());
-
 		}
 
 		CompilationUnitSyntax GetRoot()

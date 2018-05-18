@@ -25,5 +25,11 @@ namespace CodePraser.HooksInjection
 			Statements.Add(s);
 		}
 
+        internal List<KeyValuePair<int, string>> GetHooks()
+        {
+			List<KeyValuePair<int, string>> outP = new List<KeyValuePair<int, string>>(){};
+			outP.Add(new KeyValuePair<int, string>(0,"OnMethodEnter();\n"));
+			return outP;
+        }
 	}
 }

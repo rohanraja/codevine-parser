@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CodePraser;
 using CodePraser.HooksInjection;
+using System.IO;
 
 namespace CodeParserTests
 {
@@ -25,6 +26,13 @@ namespace CodeParserTests
 			Assert.IsTrue(blocks[0].methodName == "ClassA");
 
 			Assert.IsTrue(blocks[1].Statements[0].LineNo == 21);
+
+			HooksRenderer hooksRenderer = new HooksRenderer(sourceFile, blocks);
+
+			string outText = hooksRenderer.GetHookedCode();
+			File.WriteAllText("/tmp/code.cs", outText);
+
+			Assert.IsTrue(outText.Contains("OnMethodEnter"));
 
 
         }
