@@ -8,7 +8,7 @@ namespace CodeParserTests
     [TestClass]
     public class HookInjectionTests
     {
-        [TestMethod]
+        //[TestMethod]
         public void TestParsingCodeFiles()
         {
 
@@ -25,7 +25,7 @@ namespace CodeParserTests
 			Assert.IsTrue(blocks[2].methodName == "GetCount");
 			Assert.IsTrue(blocks[0].methodName == "ClassA");
 
-			Assert.IsTrue(blocks[1].Statements[0].LineNo == 21);
+			Assert.IsTrue(blocks[1].Statements[0].LineNo == 19);
 
 			HooksRenderer hooksRenderer = new HooksRenderer(sourceFile, blocks);
 
@@ -34,7 +34,18 @@ namespace CodeParserTests
 
 			Assert.IsTrue(outText.Contains("OnMethodEnter"));
 
-
         }
+
+		[TestMethod]
+        public void FullTest()
+		{
+			SourceCodeInfo sourceCode = new SourceCodeInfo(GitTests.RepoPath);
+            sourceCode.AddCodeFile("ClassA.cs");
+            sourceCode.AddCodeFile("ClassB.cs");
+            sourceCode.AddCodeFile("Program.cs");
+
+			Parser parser = new Parser(sourceCode);
+			parser.Parse();
+		}
     }
 }

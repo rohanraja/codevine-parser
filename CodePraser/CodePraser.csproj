@@ -17,5 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="HooksInjection\UsingCollector.cs" />
+    <Compile Remove="Run.cs" />
   </ItemGroup>
 </Project>

@@ -13,6 +13,11 @@ namespace CodeRecordHelpers
 		public Guid CodeRunID = Guid.NewGuid();
 		private HookHelpers hookHelpers;
 
+		public static string Now()
+		{
+			return System.DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+		}
+
 		public static CodeHooks Instance()
 		{
 			if (_instance == null)

@@ -35,7 +35,8 @@ namespace CodeReader
 
         public void SetContentsOfFileAtRoot(string fPath, string newContents)
         {
-            throw new NotImplementedException();
+			var fullPath = GetFullPath(fPath);
+			File.WriteAllText(fullPath, newContents);
         }
 
         public string GetCSProjContents()

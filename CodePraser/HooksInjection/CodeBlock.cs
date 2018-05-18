@@ -41,13 +41,13 @@ namespace CodePraser.HooksInjection
 
 		private KeyValuePair<int, string> MethodEnterHook()
 		{
-			string expr = string.Format("var mrid = CodeHooks.Instance().OnMethodEnter(\"{0}\", \"{1}\");\n", sourceFile.FPath ,methodName);
+			string expr = string.Format("var mrid = CodeHooks.Instance().OnMethodEnter(\"{0}\", \"{1}\");\n\n", sourceFile.FPath ,methodName);
 			return new KeyValuePair<int, string>(0, expr) ;
 		}
 
 		private KeyValuePair<int, string> LineExecHook(Statement statement)
         {
-			string expr = string.Format("CodeHooks.Instance().LogLineRun(mrid, {0}, CodeHooks.Now());\n", statement.LineNo);
+			string expr = string.Format("CodeHooks.Instance().LogLineRun(mrid, {0}, CodeHooks.Now());\n\n", statement.LineNo);
 			return new KeyValuePair<int, string>(statement.Location.StatementId, expr);
         }
 	}
