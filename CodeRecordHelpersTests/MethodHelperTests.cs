@@ -1,3 +1,4 @@
+using System;
 using CodeRecordHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -41,16 +42,22 @@ namespace CodeRecordHelpersTests
 
         }
 
-		[TestMethod]
+		//[TestMethod]
         public void TestLoggingLine_REDIS()
 		{
 			methodHelpers = CodeHooks.Instance();
 			System.Guid mrid = System.Guid.NewGuid();
 			methodHelpers.AddSourceFile("newClass.cs", "line1\nline2\nline3\nline4\nline5");
+			methodHelpers.AddSourceFile("classB.cs", "This\nis\na\nreally\ninteresting\ncode");
 			methodHelpers.OnMethodEnter(mrid, "newClass.cs", "MethodA");
 			methodHelpers.LogLineRun(mrid, 0, "09-04-1993");
 			methodHelpers.LogLineRun(mrid, 1, "09-04-1994");
 			methodHelpers.LogLineRun(mrid, 3, "09-04-1995");
+			mrid = Guid.NewGuid();
+            methodHelpers.OnMethodEnter(mrid, "classB.cs", "MethodB");
+            methodHelpers.LogLineRun(mrid, 0, "09-04-1993");
+            methodHelpers.LogLineRun(mrid, 1, "09-04-1994");
+            methodHelpers.LogLineRun(mrid, 3, "09-04-1995");
 		}
     }
 }
