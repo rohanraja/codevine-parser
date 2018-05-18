@@ -33,7 +33,7 @@ namespace CodeParserTests
 			Assert.IsTrue(msg.GetMessage().Contains("MethodA_1"));
         }
 
-		[TestMethod]
+		//[TestMethod]
         public void RegisterInRails()
 		{
 			SourceCodeInfo sourceCode = new SourceCodeInfo(GitTests.RepoPath);

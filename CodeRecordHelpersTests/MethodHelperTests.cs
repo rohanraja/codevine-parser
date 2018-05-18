@@ -42,7 +42,7 @@ namespace CodeRecordHelpersTests
 
         }
 
-		[TestMethod]
+		//[TestMethod]
         public void TestLoggingLine_REDIS()
 		{
 			methodHelpers = CodeHooks.Instance();
