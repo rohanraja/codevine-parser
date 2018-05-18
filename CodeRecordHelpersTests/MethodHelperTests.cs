@@ -42,22 +42,34 @@ namespace CodeRecordHelpersTests
 
         }
 
-		//[TestMethod]
+		[TestMethod]
         public void TestLoggingLine_REDIS()
 		{
 			methodHelpers = CodeHooks.Instance();
 			System.Guid mrid = System.Guid.NewGuid();
-			methodHelpers.AddSourceFile("newClass.cs", "line1\nline2\nline3\nline4\nline5");
-			methodHelpers.AddSourceFile("classB.cs", "This\nis\na\nreally\ninteresting\ncode");
-			methodHelpers.OnMethodEnter(mrid, "newClass.cs", "MethodA");
-			methodHelpers.LogLineRun(mrid, 0, "09-04-1993");
-			methodHelpers.LogLineRun(mrid, 1, "09-04-1994");
-			methodHelpers.LogLineRun(mrid, 3, "09-04-1995");
+			//methodHelpers.AddSourceFile("newClass.cs", "line1\nline2\nline3\nline4\nline5");
+			//methodHelpers.AddSourceFile("classB.cs", "This\nis\na\nreally\ninteresting\ncode");
+			methodHelpers.OnMethodEnter(mrid, "Program.cs", "MethodA");
+			methodHelpers.LogLineRun(mrid, 8, "09-04-1993");
 			mrid = Guid.NewGuid();
-            methodHelpers.OnMethodEnter(mrid, "classB.cs", "MethodB");
-            methodHelpers.LogLineRun(mrid, 0, "09-04-1993");
-            methodHelpers.LogLineRun(mrid, 1, "09-04-1994");
-            methodHelpers.LogLineRun(mrid, 3, "09-04-1995");
+            methodHelpers.OnMethodEnter(mrid, "ClassA.cs", "MethodB");
+            methodHelpers.LogLineRun(mrid, 13, "09-04-1994");
+            methodHelpers.LogLineRun(mrid, 15, "09-04-1995");
+
+			mrid = Guid.NewGuid();
+            methodHelpers.OnMethodEnter(mrid, "ClassB.cs", "MethodC");
+			methodHelpers.LogLineRun(mrid, 10, "09-04-1994");
+            methodHelpers.LogLineRun(mrid, 12, "09-04-1995");
+
+			mrid = Guid.NewGuid();
+            methodHelpers.OnMethodEnter(mrid, "ClassA.cs", "MethodB");
+            methodHelpers.LogLineRun(mrid, 15, "09-04-1996");
+
+			mrid = Guid.NewGuid();
+            methodHelpers.OnMethodEnter(mrid, "Program.cs", "MethodB");
+            methodHelpers.LogLineRun(mrid, 8, "09-04-1997");
+			methodHelpers.LogLineRun(mrid, 9, "09-04-1998");
+			methodHelpers.LogLineRun(mrid, 10, "09-04-1999");
 		}
     }
 }

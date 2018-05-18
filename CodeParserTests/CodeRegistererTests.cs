@@ -14,8 +14,6 @@ namespace CodeParserTests
         {
 			SourceCodeInfo sourceCode = new SourceCodeInfo(GitTests.RepoPath);
 			sourceCode.AddCodeFile("ClassA.cs");
-			sourceCode.AddCodeFile("ClassB.cs");
-			sourceCode.AddCodeFile("Program.cs");
 
 			var mock = new Mock<IMessageDispatcher>();
             RedisMessage msg = new RedisMessage("", "");
@@ -27,11 +25,25 @@ namespace CodeParserTests
 			codeRegisterer.Register(sourceCode);
 
 
-			mock.Verify(x => x.DispatchMessage(It.IsAny<RedisMessage>()), Times.AtLeast(3));
+			mock.Verify(x => x.DispatchMessage(It.IsAny<RedisMessage>()), Times.AtLeast(1));
 
             Assert.IsTrue(msg.GetKey().Contains("CODE_RUN_EVENTS"));
 			Assert.IsTrue(msg.GetMessage().Contains("ADD_SOURCE_FILE"));
+			Assert.IsTrue(msg.GetMessage().Contains("ClassA.cs"));
+			Assert.IsTrue(msg.GetMessage().Contains("MethodA_1"));
         }
+
+		[TestMethod]
+        public void RegisterInRails()
+		{
+			SourceCodeInfo sourceCode = new SourceCodeInfo(GitTests.RepoPath);
+            sourceCode.AddCodeFile("ClassA.cs");
+			sourceCode.AddCodeFile("ClassB.cs");
+			sourceCode.AddCodeFile("Program.cs");
+
+			CodeRegisterer codeRegisterer = new CodeRegisterer();
+            codeRegisterer.Register(sourceCode);
+		}
 
     }
 }
