@@ -4,7 +4,8 @@ using CodeReader;
 
 namespace CodeParserTests
 {
-    [TestClass]
+
+	[TestClass]
     public class UnitTest1
     {
 

@@ -26,6 +26,7 @@ namespace TestCSharpProject
         public int GetCount()
 		{
 			return count;
+
 		}
 
 
