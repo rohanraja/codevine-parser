@@ -7,4 +7,8 @@
   <ItemGroup>
     <PackageReference Include="LibGit2Sharp" Version="0.25.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeReader\CodeReader.csproj" />
+    <ProjectReference Include="..\CodeRecordHelpers\CodeRecordHelpers.csproj" />
+  </ItemGroup>
 </Project>

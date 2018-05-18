@@ -3,17 +3,17 @@ using CodePraser;
 
 namespace CodeParserTests
 {
-    [TestClass]
+	[TestClass]
     public class GitTests
     {
+		public static string RepoPath = "/Users/rohan/code/codevine_parser/CodeVine_Parser/TestCSharpProject";
 
         //[TestMethod]
         public void TestGitReset()
         {
-			string repoPath = "/Users/rohan/code/codevine_parser/CodeVine_Parser/TestCSharpProject";
 
 			var git = new GitHelpers();
-			git.ResetHard(repoPath);
+			git.ResetHard(RepoPath);
         }
     }
 }
