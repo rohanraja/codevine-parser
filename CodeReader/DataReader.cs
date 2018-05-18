@@ -33,6 +33,11 @@ namespace CodeReader
 			ProjectPath = projectPath;
 		}
 
+        public void SetContentsOfFileAtRoot(string fPath, string newContents)
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetCSProjContents()
 		{
 			string fname = GetCsProjFname();
