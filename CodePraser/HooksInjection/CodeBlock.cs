@@ -28,8 +28,27 @@ namespace CodePraser.HooksInjection
         internal List<KeyValuePair<int, string>> GetHooks()
         {
 			List<KeyValuePair<int, string>> outP = new List<KeyValuePair<int, string>>(){};
-			outP.Add(new KeyValuePair<int, string>(0,"OnMethodEnter();\n"));
+			outP.Add(MethodEnterHook());
+
+			foreach(var statement in Statements)
+			{
+				var kvp = LineExecHook(statement);
+				outP.Add(kvp);
+				
+			}
 			return outP;
+        }
+
+		private KeyValuePair<int, string> MethodEnterHook()
+		{
+			string expr = string.Format("var mrid = CodeHooks.Instance().OnMethodEnter(\"{0}\", \"{1}\");\n", sourceFile.FPath ,methodName);
+			return new KeyValuePair<int, string>(0, expr) ;
+		}
+
+		private KeyValuePair<int, string> LineExecHook(Statement statement)
+        {
+			string expr = string.Format("CodeHooks.Instance().LogLineRun(mrid, {0}, CodeHooks.Now());\n", statement.LineNo);
+			return new KeyValuePair<int, string>(statement.Location.StatementId, expr);
         }
 	}
 }

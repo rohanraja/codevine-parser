@@ -40,17 +40,20 @@ namespace CodeRecordHelpers
 			hookHelpers.DispatchCodeRunEvent(CodeRunID.ToString(), payload, eventType);
         }
 
-		public void OnMethodEnter(Guid mrid, string relativeFilePath, string methodName)
+		public Guid OnMethodEnter(string relativeFilePath, string methodName)
         {
             var eventType = "METHOD_ENTER";
 
 
+			var mrid = Guid.NewGuid();
             var payload = new List<string>() { };
             payload.Add(mrid.ToString());
             payload.Add(relativeFilePath);
             payload.Add(methodName);
 
             hookHelpers.DispatchCodeRunEvent(CodeRunID.ToString(), payload, eventType);
+
+			return mrid;
         }
 
 		public void LogLineRun(Guid mrid, int lineNo, string timeStamp)
