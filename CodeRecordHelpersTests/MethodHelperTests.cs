@@ -46,8 +46,11 @@ namespace CodeRecordHelpersTests
 		{
 			methodHelpers = CodeHooks.Instance();
 			System.Guid mrid = System.Guid.NewGuid();
+			methodHelpers.AddSourceFile("newClass.cs", "line1\nline2\nline3\nline4\nline5");
 			methodHelpers.OnMethodEnter(mrid, "newClass.cs", "MethodA");
-			methodHelpers.LogLineRun(mrid, 112, "09-04-1993");
+			methodHelpers.LogLineRun(mrid, 0, "09-04-1993");
+			methodHelpers.LogLineRun(mrid, 1, "09-04-1994");
+			methodHelpers.LogLineRun(mrid, 3, "09-04-1995");
 		}
     }
 }
