@@ -46,5 +46,13 @@ namespace CodePraser.HooksInjection
 		{
 			return codeBlocks[blockId];
 		}
+
+		public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)
+		{
+			var doneNode = base.VisitCompilationUnit(node);
+			var usng = SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(" CodeRecordHelpers"));
+			var newUsings = node.Usings.Add(usng);
+			return ((CompilationUnitSyntax)doneNode).WithUsings(newUsings);
+		}
 	}
 }
