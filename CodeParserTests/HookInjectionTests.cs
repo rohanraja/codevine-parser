@@ -24,6 +24,8 @@ namespace CodeParserTests
 			Assert.IsTrue(blocks[2].methodName == "GetCount");
 			Assert.IsTrue(blocks[0].methodName == "ClassA");
 
+			Assert.IsTrue(blocks[1].Statements[0].LineNo == 21);
+
 
         }
     }

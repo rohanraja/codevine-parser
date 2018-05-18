@@ -32,7 +32,7 @@ namespace CodePraser.HooksInjection
 
 		public List<CodeBlock> GetCodeBlocks()
 		{
-			var codeBlockCollector = new CodeBlockCollector(this.SourceFile);
+			var codeBlockCollector = new CodeBlockCollector(this.SourceFile, this.syntaxTree);
 
 			var root = GetRoot();
 
