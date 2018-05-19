@@ -8,11 +8,14 @@ namespace CodeParserTests
     [TestClass]
     public class HookInjectionTests
     {
-        //[TestMethod]
+        [TestMethod]
         public void TestParsingCodeFiles()
         {
 
 			var dir = GitTests.RepoPath;
+			var git = new GitHelpers();
+            git.ResetHard(dir);
+
 			var fName = "ClassA.cs";
 
 			var sourceFile = new SourceFile(fName, dir);
@@ -36,7 +39,7 @@ namespace CodeParserTests
 
         }
 
-		[TestMethod]
+		//[TestMethod]
         public void FullTest()
 		{
 			ProjectHookingPipeline parser = new ProjectHookingPipeline(GitTests.RepoPath, GitTests.RepoCsProj);
