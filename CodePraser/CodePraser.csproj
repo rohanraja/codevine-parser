@@ -24,5 +24,6 @@
   <ItemGroup>
     <Compile Remove="HooksInjection\UsingCollector.cs" />
     <Compile Remove="Run.cs" />
+    <Compile Remove="LinesExtractor.cs" />
   </ItemGroup>
 </Project>

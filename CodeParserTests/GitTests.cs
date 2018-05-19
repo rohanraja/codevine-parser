@@ -8,6 +8,8 @@ namespace CodeParserTests
     {
 		public static string RepoPath = "/Users/rohan/code/codevine_parser/CodeVine_Parser/TestCSharpProject";
 
+		public static string RepoCsProj = "TestCSharpProject.csproj";
+
         //[TestMethod]
         public void TestGitReset()
         {

@@ -36,16 +36,14 @@ namespace CodeParserTests
 
         }
 
-		//[TestMethod]
+		[TestMethod]
         public void FullTest()
 		{
-			SourceCodeInfo sourceCode = new SourceCodeInfo(GitTests.RepoPath);
-            sourceCode.AddCodeFile("ClassA.cs");
-            sourceCode.AddCodeFile("ClassB.cs");
-            sourceCode.AddCodeFile("Program.cs");
+			ProjectParser projParser = new ProjectParser(GitTests.RepoPath, GitTests.RepoCsProj);
+			var sourceCode = projParser.sourceCodeInfo;
 
-			Parser parser = new Parser(sourceCode);
-			parser.Parse();
+			HookingPipeline parser = new HookingPipeline(sourceCode);
+			parser.Run();
 		}
     }
 }

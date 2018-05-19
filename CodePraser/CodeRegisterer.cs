@@ -1,4 +1,5 @@
 ﻿using System;
+using CodePraser.HooksInjection;
 using CodeReader;
 using CodeRecordHelpers;
 
@@ -23,16 +24,15 @@ namespace CodePraser
 		{
 			dataReader = new DataReader(sourceCode.BaseDirPath);
 
-			foreach(string fname in sourceCode.CodeFiles)
+			foreach(var sourceFile in sourceCode.SourceFiles)
 			{
-				RegisterFile(fname);			
+				RegisterFile(sourceFile);			
 			}
 		}
 
-		private void RegisterFile(string fname)
+		private void RegisterFile(SourceFile sourceFile)
 		{
-			string code = dataReader.GetContentsOfFileAtRoot(fname);
-			codeHooks.AddSourceFile(fname, code);
+			codeHooks.AddSourceFile(sourceFile.FPath, sourceFile.GetCode());
 		}
 	}
 }

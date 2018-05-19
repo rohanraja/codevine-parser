@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodePraser.HooksInjection;
 
 namespace CodePraser
 {
@@ -7,6 +8,8 @@ namespace CodePraser
     {
 		public string BaseDirPath;
 		public List<string> CodeFiles = new List<string>() { };
+
+		public List<SourceFile> SourceFiles = new List<SourceFile>() { };
 
         public SourceCodeInfo(string baseDirPath)
         {
@@ -16,6 +19,8 @@ namespace CodePraser
         public void AddCodeFile(string relativePath)
 		{
 			CodeFiles.Add(relativePath);
+
+			SourceFiles.Add(new SourceFile(relativePath, BaseDirPath));
 		}
     }
 }

@@ -2,26 +2,31 @@
 using System;
 namespace CodePraser
 {
-    public class Parser
+    public class HookingPipeline
     {
 		private readonly SourceCodeInfo sourceCodeInfo;
 
-		public Parser(SourceCodeInfo sourceCodeInfo)
+		public HookingPipeline(SourceCodeInfo sourceCodeInfo)
         {
 			this.sourceCodeInfo = sourceCodeInfo;
 		}
 
-        public void Parse()
+        public void Run()
 		{
 			ResetGitRepo();
 
-			RegisterWithDB();
+			RegisterFileContentsOnServer();
 
-			foreach (var file in sourceCodeInfo.CodeFiles)
-			{
-				SourceFile sourceFile = new SourceFile(file, sourceCodeInfo.BaseDirPath);
-				ParseFile(sourceFile);
-			}
+			HookAllSourceFiles();
+
+		}
+
+		private void HookAllSourceFiles()
+		{
+			foreach (var sourceFile in sourceCodeInfo.SourceFiles)
+            {
+                AddHooksToSourceFile(sourceFile);
+            }
 		}
 
 		private void ResetGitRepo()
@@ -30,13 +35,13 @@ namespace CodePraser
 			git.ResetHard(sourceCodeInfo.BaseDirPath);
 		}
 
-		private void RegisterWithDB()
+		private void RegisterFileContentsOnServer()
 		{
 			CodeRegisterer codeRegisterer = new CodeRegisterer();
 			codeRegisterer.Register(sourceCodeInfo);
 		}
 
-		private void ParseFile(SourceFile sourceFile)
+		private void AddHooksToSourceFile(SourceFile sourceFile)
 		{
 			var sourceFileAnalyzer = new SourceFileAnalyzer(sourceFile);
 
