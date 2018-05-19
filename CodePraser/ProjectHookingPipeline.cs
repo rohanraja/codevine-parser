@@ -4,25 +4,32 @@ namespace CodePraser
 	public class ProjectHookingPipeline
     {
 		private readonly SourceCodeInfo sourceCodeInfo;
+		private readonly string projectFileName;
 
-		public ProjectHookingPipeline(SourceCodeInfo sourceCodeInfo)
-        {
-			this.sourceCodeInfo = sourceCodeInfo;
-		}
 
 		public ProjectHookingPipeline(string projectPath, string projectFileName)
 		{
 			ProjectParser projParser = new ProjectParser(projectPath, projectFileName);
 			this.sourceCodeInfo = projParser.sourceCodeInfo;
+			this.projectFileName = projectFileName;
 		}
 
         public void Run()
 		{
 			ResetGitRepo();
 
+			AddCodeHelperReference();
+
 			RegisterFileContentsOnServer();
 
 			HookAllSourceFiles();
+		}
+
+		private void AddCodeHelperReference()
+		{
+			ProjectReferenceInjector projectReferenceInjector = new ProjectReferenceInjector();
+			projectReferenceInjector.InjectReference(sourceCodeInfo, projectFileName);
+
 		}
 
 		private void HookAllSourceFiles()
