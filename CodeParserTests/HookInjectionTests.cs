@@ -36,7 +36,7 @@ namespace CodeParserTests
 
         }
 
-		[TestMethod]
+		//[TestMethod]
         public void FullTest()
 		{
 			SourceCodeInfo sourceCode = new SourceCodeInfo(GitTests.RepoPath);
