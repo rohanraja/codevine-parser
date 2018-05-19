@@ -1,14 +1,19 @@
-﻿using CodePraser.HooksInjection;
-using System;
+﻿using System;
 namespace CodePraser
 {
-    public class HookingPipeline
+	public class ProjectHookingPipeline
     {
 		private readonly SourceCodeInfo sourceCodeInfo;
 
-		public HookingPipeline(SourceCodeInfo sourceCodeInfo)
+		public ProjectHookingPipeline(SourceCodeInfo sourceCodeInfo)
         {
 			this.sourceCodeInfo = sourceCodeInfo;
+		}
+
+		public ProjectHookingPipeline(string projectPath, string projectFileName)
+		{
+			ProjectParser projParser = new ProjectParser(projectPath, projectFileName);
+			this.sourceCodeInfo = projParser.sourceCodeInfo;
 		}
 
         public void Run()
@@ -18,14 +23,15 @@ namespace CodePraser
 			RegisterFileContentsOnServer();
 
 			HookAllSourceFiles();
-
 		}
 
 		private void HookAllSourceFiles()
 		{
+			SourceFileHooker sourceFileHooker = new SourceFileHooker();
+
 			foreach (var sourceFile in sourceCodeInfo.SourceFiles)
             {
-                AddHooksToSourceFile(sourceFile);
+				sourceFileHooker.AddHooksToSourceFile(sourceFile);
             }
 		}
 
@@ -41,14 +47,5 @@ namespace CodePraser
 			codeRegisterer.Register(sourceCodeInfo);
 		}
 
-		private void AddHooksToSourceFile(SourceFile sourceFile)
-		{
-			var sourceFileAnalyzer = new SourceFileAnalyzer(sourceFile);
-
-            var blocks = sourceFileAnalyzer.GetCodeBlocks();
-			HooksRenderer hooksRenderer = new HooksRenderer(sourceFile, blocks);
-            string outText = hooksRenderer.GetHookedCode();
-			sourceFile.UpdateCodeContents(outText);
-		}
 	}
 }
