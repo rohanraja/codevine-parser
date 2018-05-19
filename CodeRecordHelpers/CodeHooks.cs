@@ -13,9 +13,12 @@ namespace CodeRecordHelpers
 		public Guid CodeRunID = Guid.NewGuid();
 		private HookHelpers hookHelpers;
 
+		static int ticks = 0;
+        
 		public static string Now()
 		{
-			return System.DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+			ticks++;
+			return ticks.ToString();
 		}
 
 		public static CodeHooks Instance()
