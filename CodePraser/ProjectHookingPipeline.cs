@@ -32,7 +32,7 @@ namespace CodePraser
 
             projectReferenceInjector.InjectReference(sourceCodeInfo, projectFileName);
 
-            codeRegisterer.Register(sourceCodeInfo);
+            codeRegisterer.SendCodeContentsToServer(sourceCodeInfo);
 
 			sourceFileHooker.AddHooksToSourceCode(sourceCodeInfo);
 

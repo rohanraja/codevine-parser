@@ -21,6 +21,12 @@ namespace CodePraser.HooksInjection
 		{
 			var codeblock = getCurrentBlock();
 
+			if (codeblock == null)
+			{
+				blockId++;
+				return base.VisitBlock(node);
+			}
+
 			var newStments = CreateNewStatements(codeblock, node.Statements);
 			blockId++;
 			return node.WithStatements(newStments);
@@ -44,6 +50,8 @@ namespace CodePraser.HooksInjection
 
 		CodeBlock getCurrentBlock()
 		{
+			if (blockId >= codeBlocks.Count)
+				return null;
 			return codeBlocks[blockId];
 		}
 

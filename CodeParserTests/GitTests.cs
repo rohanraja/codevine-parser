@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CodePraser;
+using System;
 
 namespace CodeParserTests
 {
@@ -16,6 +17,11 @@ namespace CodeParserTests
 
 			var git = new GitHelpers();
 			git.ResetHard(RepoPath);
+        }
+
+        internal static SourceCodeInfo GetSourceCode()
+        {
+            throw new NotImplementedException();
         }
     }
 }

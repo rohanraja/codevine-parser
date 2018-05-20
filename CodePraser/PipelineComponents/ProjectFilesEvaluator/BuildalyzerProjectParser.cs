@@ -6,9 +6,9 @@ using Microsoft.CodeAnalysis;
 
 namespace CodePraser
 {
-    public class ProjectParser : IProjectParser
+    public class BuildalyzerProjectParser : IProjectParser
 	{
-		public ProjectParser()
+		public BuildalyzerProjectParser()
 		{
 		}
 
@@ -26,9 +26,7 @@ namespace CodePraser
             {
                 if (item.ItemType == "Compile")
                 {
-
                     sourceCodeInfo.AddCodeFile(item.EvaluatedInclude);
-
                 }
             }
 

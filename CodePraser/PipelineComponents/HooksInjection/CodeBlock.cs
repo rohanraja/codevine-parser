@@ -41,7 +41,7 @@ namespace CodePraser.HooksInjection
 
 		private KeyValuePair<int, string> MethodEnterHook()
 		{
-			string expr = string.Format("var mrid = CodeHooks.Instance().OnMethodEnter(\"{0}\", \"{1}\");\n\n", sourceFile.FPath ,methodName);
+			string expr = string.Format("var mrid = CodeHooks.Instance().OnMethodEnter(\"{0}\", \"{1}\");\n\n", sourceFile.FilePath ,methodName);
 			return new KeyValuePair<int, string>(0, expr) ;
 		}
 

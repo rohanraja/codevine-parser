@@ -22,7 +22,7 @@ namespace CodeParserTests
 
 			CodeRegisterer codeRegisterer = new CodeRegisterer(codeHooks);
 
-			codeRegisterer.Register(sourceCode);
+			codeRegisterer.SendCodeContentsToServer(sourceCode);
 
 
 			mock.Verify(x => x.DispatchMessage(It.IsAny<RedisMessage>()), Times.AtLeast(1));
@@ -42,7 +42,7 @@ namespace CodeParserTests
 			sourceCode.AddCodeFile("Program.cs");
 
 			CodeRegisterer codeRegisterer = new CodeRegisterer();
-            codeRegisterer.Register(sourceCode);
+            codeRegisterer.SendCodeContentsToServer(sourceCode);
 		}
 
     }

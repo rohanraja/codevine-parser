@@ -22,7 +22,7 @@ namespace CodePraser
 			var git = new GitHelpers();
 			var projectReferenceInjector = new ProjectReferenceInjector();
 			var codeRegisterer = new CodeRegisterer();
-			var projParser = new ProjectParser();
+			var projParser = new BuildalyzerProjectParser();
 
 			ProjectHookingPipeline parser = new ProjectHookingPipeline(sourceHooker, git, projectReferenceInjector, codeRegisterer, projParser);
 			parser.Run(ProjectPath, ProjectFileName);

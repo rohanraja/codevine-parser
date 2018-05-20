@@ -7,9 +7,7 @@ namespace CodePraser
 	{
 		public void InjectReference(SourceCodeInfo sourceCodeInfo, string projectFileName)
 		{
-			DataReader dataReader = new DataReader(sourceCodeInfo.BaseDirPath);
-
-			var prdata = dataReader.GetContentsOfFileAtRoot(projectFileName);
+			string prdata = sourceCodeInfo.GetContentsOfFileAtRoot(projectFileName);
 
 			string prPath = @"/Users/rohan/code/codevine_parser/CodeVine_Parser/CodeRecordHelpers/CodeRecordHelpers.csproj";
 
@@ -17,7 +15,7 @@ namespace CodePraser
 
 			var replacedStr = prdata.Replace("</Project>", replaceData);
 
-			dataReader.SetContentsOfFileAtRoot(projectFileName, replacedStr);
+			sourceCodeInfo.SetContentsOfFileAtRoot(projectFileName, replacedStr);
 		}
 	}
 }

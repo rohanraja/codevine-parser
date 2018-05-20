@@ -7,7 +7,6 @@ namespace CodePraser
 {
 	public class CodeRegisterer : ICodeRegisterer
 	{
-		private DataReader dataReader;
 		private CodeHooks codeHooks;
 
 		public CodeRegisterer()
@@ -20,10 +19,8 @@ namespace CodePraser
 			codeHooks = pCodeHooks;
         }
 
-		public void Register(SourceCodeInfo sourceCode)
+		public void SendCodeContentsToServer(SourceCodeInfo sourceCode)
 		{
-			dataReader = new DataReader(sourceCode.BaseDirPath);
-
 			foreach(var sourceFile in sourceCode.SourceFiles)
 			{
 				RegisterFile(sourceFile);			
@@ -32,7 +29,7 @@ namespace CodePraser
 
 		private void RegisterFile(SourceFile sourceFile)
 		{
-			codeHooks.AddSourceFile(sourceFile.FPath, sourceFile.GetCode());
+			codeHooks.AddSourceFile(sourceFile.FilePath, sourceFile.GetCode());
 		}
 	}
 }

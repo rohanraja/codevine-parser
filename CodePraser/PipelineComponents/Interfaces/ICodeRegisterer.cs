@@ -2,6 +2,6 @@
 {
     public interface ICodeRegisterer
     {
-        void Register(SourceCodeInfo sourceCode);
+        void SendCodeContentsToServer(SourceCodeInfo sourceCode);
     }
 }
