@@ -8,7 +8,7 @@ namespace CodeRecordHelpersTests
     {
 		RedisHelper redisHelper;
 
-		[TestInitialize]
+		//[TestInitialize]
         public void InitializeRedisInstance()
 		{
 			redisHelper = RedisHelper.GetConnectedRedisHelper();
@@ -16,7 +16,7 @@ namespace CodeRecordHelpersTests
 
 		}
 
-		[TestCleanup]
+		//[TestCleanup]
         public void DisposeRedisInstance()
         {
 			redisHelper.Dispose();
