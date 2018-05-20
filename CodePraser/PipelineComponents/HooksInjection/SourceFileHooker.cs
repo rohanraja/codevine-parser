@@ -1,5 +1,4 @@
-﻿using CodePraser.HooksInjection;
-namespace CodePraser
+﻿namespace CodePraser.HooksInjection
 {
     public class SourceFileHooker : ISourceFileHooker
 	{

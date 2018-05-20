@@ -16,7 +16,14 @@
     <ProjectReference Include="..\CodeRecordHelpers\CodeRecordHelpers.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HooksInjection\" />
+    <Folder Include="PipelineComponents\" />
+    <Folder Include="Common\" />
+    <Folder Include="PipelineComponents\Interfaces\" />
+    <Folder Include="PipelineComponents\HooksInjection\" />
+    <Folder Include="PipelineComponents\CodeRegisterer\" />
+    <Folder Include="PipelineComponents\GitHelpers\" />
+    <Folder Include="PipelineComponents\ProjectFilesEvaluator\" />
+    <Folder Include="PipelineComponents\ReferenceInjector\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="HooksInjection\UsingCollector.cs" />

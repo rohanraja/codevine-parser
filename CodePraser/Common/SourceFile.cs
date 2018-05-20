@@ -1,7 +1,7 @@
 ﻿using System;
 using CodeReader;
 
-namespace CodePraser.HooksInjection
+namespace CodePraser
 {
     public class SourceFile
     {
