@@ -3,55 +3,39 @@ namespace CodePraser
 {
 	public class ProjectHookingPipeline
     {
-		private readonly SourceCodeInfo sourceCodeInfo;
-		private readonly string projectFileName;
+		private ISourceFileHooker sourceFileHooker;
+		private IProjectReferenceInjector projectReferenceInjector;
+		private ICodeRegisterer codeRegisterer;
+		private IGitHelpers git;
+		private IProjectParser projParser;
 
-
-		public ProjectHookingPipeline(string projectPath, string projectFileName)
+		public ProjectHookingPipeline(
+			ISourceFileHooker sourceHooker,
+			IGitHelpers git_h,
+			IProjectReferenceInjector refInject,
+			ICodeRegisterer codeReg,
+			IProjectParser projParserP
+		)
 		{
-			ProjectParser projParser = new ProjectParser(projectPath, projectFileName);
-			this.sourceCodeInfo = projParser.sourceCodeInfo;
-			this.projectFileName = projectFileName;
+			sourceFileHooker = sourceHooker;
+			git = git_h;
+			projectReferenceInjector = refInject;
+			codeRegisterer = codeReg;
+			projParser = projParserP;
 		}
-
-        public void Run()
+        
+		public void Run(string projectPath, string projectFileName)
 		{
-			ResetGitRepo();
+			var sourceCodeInfo = projParser.GetSourceCodeInfo(projectPath, projectFileName);
 
-			AddCodeHelperReference();
+            git.ResetHard(sourceCodeInfo.BaseDirPath);
 
-			RegisterFileContentsOnServer();
+            projectReferenceInjector.InjectReference(sourceCodeInfo, projectFileName);
 
-			HookAllSourceFiles();
-		}
+            codeRegisterer.Register(sourceCodeInfo);
 
-		private void AddCodeHelperReference()
-		{
-			ProjectReferenceInjector projectReferenceInjector = new ProjectReferenceInjector();
-			projectReferenceInjector.InjectReference(sourceCodeInfo, projectFileName);
+			sourceFileHooker.AddHooksToSourceCode(sourceCodeInfo);
 
-		}
-
-		private void HookAllSourceFiles()
-		{
-			SourceFileHooker sourceFileHooker = new SourceFileHooker();
-
-			foreach (var sourceFile in sourceCodeInfo.SourceFiles)
-            {
-				sourceFileHooker.AddHooksToSourceFile(sourceFile);
-            }
-		}
-
-		private void ResetGitRepo()
-		{
-			var git = new GitHelpers();
-			git.ResetHard(sourceCodeInfo.BaseDirPath);
-		}
-
-		private void RegisterFileContentsOnServer()
-		{
-			CodeRegisterer codeRegisterer = new CodeRegisterer();
-			codeRegisterer.Register(sourceCodeInfo);
 		}
 
 	}

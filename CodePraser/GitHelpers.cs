@@ -3,8 +3,8 @@ using LibGit2Sharp;
 
 namespace CodePraser
 {
-    public class GitHelpers
-    {
+    public class GitHelpers : IGitHelpers
+	{
         public GitHelpers()
         {
         }

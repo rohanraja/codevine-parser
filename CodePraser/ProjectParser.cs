@@ -6,38 +6,35 @@ using Microsoft.CodeAnalysis;
 
 namespace CodePraser
 {
-    public class ProjectParser
-    {
-		public string RootDir { get; }
-		public string projName { get; }
-		public SourceCodeInfo sourceCodeInfo { get; private set; }
-
-		public ProjectParser(string rootDir, string proName)
+    public class ProjectParser : IProjectParser
+	{
+		public ProjectParser()
 		{
-			RootDir = rootDir;
-			projName = proName;
-			Parse();
 		}
 
-		public void Parse()
+		public SourceCodeInfo GetSourceCodeInfo(string rootDir, string proName)
 		{
-			var sln = Path.Combine(RootDir, projName);
-			AnalyzerManager manager = new AnalyzerManager();
-			var pro = manager.GetProject(sln);
-			var pro2 = pro.Load();
+			
+			var sln = Path.Combine(rootDir, proName);
+            AnalyzerManager manager = new AnalyzerManager();
+            var pro = manager.GetProject(sln);
+            var pro2 = pro.Load();
 
-			sourceCodeInfo = new SourceCodeInfo(RootDir);
+            var sourceCodeInfo = new SourceCodeInfo(rootDir);
 
-			foreach(var item in pro2.Items)
-			{
-				if(item.ItemType == "Compile"){
+            foreach (var item in pro2.Items)
+            {
+                if (item.ItemType == "Compile")
+                {
 
-					sourceCodeInfo.AddCodeFile(item.EvaluatedInclude);
+                    sourceCodeInfo.AddCodeFile(item.EvaluatedInclude);
 
-				}
-			}
+                }
+            }
 
+			return sourceCodeInfo;
 
 		}
+
 	}
 }

@@ -42,8 +42,8 @@ namespace CodeParserTests
 		//[TestMethod]
         public void FullTest()
 		{
-			ProjectHookingPipeline parser = new ProjectHookingPipeline(GitTests.RepoPath, GitTests.RepoCsProj);
-			parser.Run();
+			//ProjectHookingPipeline parser = new ProjectHookingPipeline(GitTests.RepoPath, GitTests.RepoCsProj);
+			//parser.Run();
 		}
     }
 }

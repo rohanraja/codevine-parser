@@ -5,7 +5,7 @@ using CodeRecordHelpers;
 
 namespace CodePraser
 {
-	public class CodeRegisterer
+	public class CodeRegisterer : ICodeRegisterer
 	{
 		private DataReader dataReader;
 		private CodeHooks codeHooks;

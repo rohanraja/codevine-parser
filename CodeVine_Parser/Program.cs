@@ -19,8 +19,8 @@ namespace CodeVine_Parser
 				RepoCsProj = args[1];
 			}
 
-			ProjectHookingPipeline parser = new ProjectHookingPipeline(RepoPath, RepoCsProj);
-            parser.Run();
+			var piplineRunner = new PipelineRunner(RepoPath, RepoCsProj);
+			piplineRunner.RunPipeLine();
         }
     }
 }

@@ -1,9 +1,17 @@
 ﻿using CodePraser.HooksInjection;
 namespace CodePraser
 {
-    public class SourceFileHooker
-    {
-        public void AddHooksToSourceFile(SourceFile sourceFile)
+    public class SourceFileHooker : ISourceFileHooker
+	{
+		public void AddHooksToSourceCode(SourceCodeInfo sourceCodeInfo)
+		{
+            foreach (var sourceFile in sourceCodeInfo.SourceFiles)
+            {
+                AddHooksToSourceFile(sourceFile);
+            }
+		}
+
+	    void AddHooksToSourceFile(SourceFile sourceFile)
         {
             var sourceFileAnalyzer = new SourceFileAnalyzer(sourceFile);
 

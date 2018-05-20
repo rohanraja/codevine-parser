@@ -3,9 +3,9 @@ using CodeReader;
 
 namespace CodePraser
 {
-	internal class ProjectReferenceInjector
+	public class ProjectReferenceInjector : IProjectReferenceInjector
 	{
-		internal void InjectReference(SourceCodeInfo sourceCodeInfo, string projectFileName)
+		public void InjectReference(SourceCodeInfo sourceCodeInfo, string projectFileName)
 		{
 			DataReader dataReader = new DataReader(sourceCodeInfo.BaseDirPath);
 
