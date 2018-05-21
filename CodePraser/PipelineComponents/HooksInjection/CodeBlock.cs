@@ -5,7 +5,7 @@ namespace CodePraser.HooksInjection
 {
     public class CodeBlock
     {
-		private readonly SourceFile sourceFile;
+		public readonly SourceFile sourceFile;
 		public readonly string methodName;
 		private readonly Location location;
 		public bool IsMethod { get; }
