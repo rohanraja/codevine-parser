@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodePraser.PipelineComponents.HooksInjection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -8,18 +9,13 @@ namespace CodePraser.HooksInjection
 {
     public class HooksRenderer
     {
-		private readonly SourceFile sourceFile;
-		private readonly List<CodeBlock> codeBlocks;
 		private SyntaxTree syntaxTree;
 
-		public HooksRenderer(SourceFile sourceFile, List<CodeBlock> codeBlocks)
+        public HooksRenderer()
         {
-			this.sourceFile = sourceFile;
-			this.codeBlocks = codeBlocks;
-			Parse();
+        }
 
-		}
-		void Parse()
+		void Parse(SourceFile sourceFile)
         {
             syntaxTree = CSharpSyntaxTree.ParseText(sourceFile.GetCode());
         }
@@ -31,12 +27,13 @@ namespace CodePraser.HooksInjection
             return root;
         }
 
-		public string GetHookedCode()
-		{
+        public string GetHookedCode(SourceFile sourceFile, List<Hooks> hooksList)
+        {
+			Parse(sourceFile);
 			var root = GetRoot();
-			var statementWriter = new StatementWriter(codeBlocks);
-			var newRoot = statementWriter.Visit(root);
-			return newRoot.GetText().ToString();
-		}
-	}
+			var statementWriter = new StatementWriter(hooksList);
+            var newRoot = statementWriter.Visit(root);
+            return newRoot.GetText().ToString();
+        }
+   	}
 }

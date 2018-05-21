@@ -35,13 +35,17 @@ namespace CodeParserTests
 		}
 
 		[TestMethod]
-        public void Test_INTEGRATION_ANALYSER_RENDERER()
+        public void Test_INTEGRATION_ANALYSER_HOOKGENERATOR_RENDERER()
         {
 
 			var sourceFileAnalyzer = new SourceFileAnalyzer(this.sourceFile);
 			var blocks = sourceFileAnalyzer.GetCodeBlocks();
-			HooksRenderer hooksRenderer = new HooksRenderer(sourceFile, blocks);
-			string outText = hooksRenderer.GetHookedCode();
+
+			CodeblocksToHooksGenerator gen = new CodeblocksToHooksGenerator();
+            var hooksList = gen.GenerateHooks(blocks);
+
+			HooksRenderer hooksRenderer = new HooksRenderer();
+			string outText = hooksRenderer.GetHookedCode(sourceFile, hooksList);
 
 			Assert.IsTrue(outText.Contains("OnMethodEnter"));
 			Assert.IsTrue(outText.Contains("using CodeRecordHelpers;"));
@@ -66,8 +70,11 @@ namespace CodeParserTests
 		{
 			List<CodeBlock> blocks = GenerateTestCodeBlock();
 
-			HooksRenderer hooksRenderer = new HooksRenderer(sourceFile, blocks);
-			string outText = hooksRenderer.GetHookedCode();
+            CodeblocksToHooksGenerator gen = new CodeblocksToHooksGenerator();
+            var hooksList = gen.GenerateHooks(blocks);
+
+            HooksRenderer hooksRenderer = new HooksRenderer();
+            string outText = hooksRenderer.GetHookedCode(sourceFile, hooksList);
 
 			Assert.IsTrue(outText.Contains("OnMethodEnter"));
 			Assert.IsTrue(outText.Contains("LogLineRun"));

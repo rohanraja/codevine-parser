@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodePraser.PipelineComponents.HooksInjection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -9,12 +10,12 @@ namespace CodePraser.HooksInjection
 {
 	public class StatementWriter : CSharpSyntaxRewriter
     {
-		private readonly List<CodeBlock> codeBlocks;
 		int blockId = 0;
+		private List<Hooks> hooksList;
 
-		public StatementWriter(List<CodeBlock> codeBlocks)
+		public StatementWriter(List<Hooks> hooksList)
 		{
-			this.codeBlocks = codeBlocks;
+			this.hooksList = hooksList;
 		}
 
 		public override SyntaxNode VisitBlock(BlockSyntax node)
@@ -32,9 +33,9 @@ namespace CodePraser.HooksInjection
 			return node.WithStatements(newStments);
 		}
 
-		private SyntaxList<StatementSyntax> CreateNewStatements(CodeBlock codeblock, SyntaxList<StatementSyntax> statements)
+		private SyntaxList<StatementSyntax> CreateNewStatements(Hooks codeblock, SyntaxList<StatementSyntax> statements)
 		{
-			List<KeyValuePair<int, string>> hooks = codeblock.GetHooks();
+			List<KeyValuePair<int, string>> hooks = codeblock.Pairs;
 
 			var outStatements = statements;
             
@@ -47,12 +48,12 @@ namespace CodePraser.HooksInjection
 			}
 			return outStatements;
 		}
-
-		CodeBlock getCurrentBlock()
+        
+		Hooks getCurrentBlock()
 		{
-			if (blockId >= codeBlocks.Count)
+			if (blockId >= hooksList.Count)
 				return null;
-			return codeBlocks[blockId];
+			return hooksList[blockId];
 		}
 
 		public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)

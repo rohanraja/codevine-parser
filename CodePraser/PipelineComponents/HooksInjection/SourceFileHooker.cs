@@ -1,4 +1,6 @@
-﻿namespace CodePraser.HooksInjection
+﻿using CodePraser.PipelineComponents.HooksInjection;
+
+namespace CodePraser.HooksInjection
 {
     public class SourceFileHooker : ISourceFileHooker
 	{
@@ -15,9 +17,12 @@
             var sourceFileAnalyzer = new SourceFileAnalyzer(sourceFile);
 
             var blocks = sourceFileAnalyzer.GetCodeBlocks();
-            HooksRenderer hooksRenderer = new HooksRenderer(sourceFile, blocks);
-            string outText = hooksRenderer.GetHookedCode();
-            sourceFile.UpdateCodeContents(outText);
+			CodeblocksToHooksGenerator gen = new CodeblocksToHooksGenerator();
+            var hooksList = gen.GenerateHooks(blocks);
+
+            HooksRenderer hooksRenderer = new HooksRenderer();
+            string outText = hooksRenderer.GetHookedCode(sourceFile, hooksList);
+			sourceFile.UpdateCodeContents(outText);
         }
 
     }
