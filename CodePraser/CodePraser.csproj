@@ -25,6 +25,7 @@
     <Folder Include="PipelineComponents\GitHelpers\" />
     <Folder Include="PipelineComponents\ProjectFilesEvaluator\" />
     <Folder Include="PipelineComponents\ReferenceInjector\" />
+    <Folder Include="PipelineComponents\HooksInjection\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="HooksInjection\UsingCollector.cs" />
