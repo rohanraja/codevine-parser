@@ -13,13 +13,14 @@ namespace HooksInjectorTests
 		private string dir;
 		private SourceFile sourceFile;
 
+
 		[TestInitialize]
 		public void SetupSourceFile()
 		{
 			dir = GitTests.RepoPath;
 			GitReset();
             var fName = "ClassA.cs";
-            sourceFile = new SourceFile(fName, dir);
+			sourceFile = PipelineComponentsFactory.GetSourceFileForFile(fName);
 		}
 
 		[TestCleanup]

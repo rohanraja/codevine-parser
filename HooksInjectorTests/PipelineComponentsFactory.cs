@@ -7,6 +7,13 @@ namespace HooksInjectorTests
 {
     public class PipelineComponentsFactory
     {
+		public static SourceFile GetSourceFileForFile(string fname)
+        {
+            var dir = GitTests.RepoPath;
+            var fName = "ClassA.cs";
+            return new SourceFile(fName, dir);
+        }
+
 		public static List<CodeBlock> GenerateTestCodeBlock(SourceFile sourceFile)
         {
             List<CodeBlock> blocks = new List<CodeBlock>() { };

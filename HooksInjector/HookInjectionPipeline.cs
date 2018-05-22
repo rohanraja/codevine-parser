@@ -9,7 +9,7 @@ namespace HooksInjector
         {
         }
 
-		public void AddHooksToSourceFile(SourceFile sourceFile)
+		public string AddHooksToSourceFile(SourceFile sourceFile)
         {
             var sourceFileAnalyzer = new SourceFileAnalyzer(sourceFile);
             var blocks = sourceFileAnalyzer.GetCodeBlocks();
@@ -19,8 +19,8 @@ namespace HooksInjector
 
             HooksRenderer hooksRenderer = new HooksRenderer();
             string outText = hooksRenderer.GetHookedCode(sourceFile, hooksList);
+			return outText;
 
-            sourceFile.UpdateCodeContents(outText);
         }
     }
 }

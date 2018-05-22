@@ -4,28 +4,22 @@ namespace HooksInjector
 {
     public class SourceFileHooker : ISourceFileHooker
 	{
-		public void AddHooksToSourceCode(SourceCodeInfo sourceCodeInfo)
+		private HookInjectionPipeline hookInjectionPipeline;
+
+		public SourceFileHooker()
 		{
-            foreach (var sourceFile in sourceCodeInfo.SourceFiles)
-            {
-                AddHooksToSourceFile(sourceFile);
-            }
+			hookInjectionPipeline = new HookInjectionPipeline();
 		}
 
-		// Todo : Refactor pipline to interface
-	    void AddHooksToSourceFile(SourceFile sourceFile)
-        {
-            var sourceFileAnalyzer = new SourceFileAnalyzer(sourceFile);
-            var blocks = sourceFileAnalyzer.GetCodeBlocks();
+		public void AddHooksToSourceCode(SourceCodeInfo sourceCodeInfo)
+		{
 
-			CodeblocksToHooksGenerator gen = new CodeblocksToHooksGenerator();
-            var hooksList = gen.GenerateHooks(blocks);
-
-            HooksRenderer hooksRenderer = new HooksRenderer();
-            string outText = hooksRenderer.GetHookedCode(sourceFile, hooksList);
-
-			sourceFile.UpdateCodeContents(outText);
-        }
+            foreach (var sourceFile in sourceCodeInfo.SourceFiles)
+            {
+				var outText = hookInjectionPipeline.AddHooksToSourceFile(sourceFile);
+				sourceFile.UpdateCodeContents(outText);
+            }
+		}
 
     }
 }
