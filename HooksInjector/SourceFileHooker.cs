@@ -2,7 +2,7 @@
 
 namespace HooksInjector
 {
-    public class SourceFileHooker //: ISourceFileHooker
+    public class SourceFileHooker : ISourceFileHooker
 	{
 		public void AddHooksToSourceCode(SourceCodeInfo sourceCodeInfo)
 		{

@@ -15,16 +15,15 @@
     <ProjectReference Include="..\CodeReader\CodeReader.csproj" />
     <ProjectReference Include="..\CodeRecordHelpers\CodeRecordHelpers.csproj" />
     <ProjectReference Include="..\CodeParserCommon\CodeParserCommon.csproj" />
+    <ProjectReference Include="..\HooksInjector\HooksInjector.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PipelineComponents\" />
     <Folder Include="Common\" />
-    <Folder Include="PipelineComponents\HooksInjection\" />
     <Folder Include="PipelineComponents\CodeRegisterer\" />
     <Folder Include="PipelineComponents\GitHelpers\" />
     <Folder Include="PipelineComponents\ProjectFilesEvaluator\" />
     <Folder Include="PipelineComponents\ReferenceInjector\" />
-    <Folder Include="PipelineComponents\HooksInjection\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="HooksInjection\UsingCollector.cs" />
