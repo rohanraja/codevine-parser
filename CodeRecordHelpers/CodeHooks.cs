@@ -63,7 +63,7 @@ namespace CodeRecordHelpers
 			return mrid;
         }
 
-		public void LogLineRun(Guid mrid, int lineNo, string timeStamp)
+		public void LogLineRun(Guid mrid, int lineNo, string timeStamp, string methodRunningState="RUNNING")
         {
 
             //var payload = new LineExecPayloadHolder(mrid, lineNo, timeStamp);
@@ -73,6 +73,7 @@ namespace CodeRecordHelpers
 			payload.Add(mrid.ToString());
 			payload.Add(lineNo.ToString());
 			payload.Add(timeStamp);
+			payload.Add(methodRunningState);
 
 
 			hookHelpers.DispatchCodeRunEvent(CodeRunID.ToString(), payload, eventType);

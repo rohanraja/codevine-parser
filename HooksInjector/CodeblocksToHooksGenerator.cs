@@ -35,7 +35,7 @@ namespace HooksInjector
 
             foreach (var statement in block.Statements)
             {
-				var kvp = HookTemplates.LineExecHook(statement.Location.StatementId, statement.LineNo);
+				var kvp = HookTemplates.LineExecHook(statement.Location.StatementId, statement.LineNo, statement.MethodRunState);
                 outP.Add(kvp);
 
             }

@@ -11,9 +11,9 @@ namespace HooksInjector
             return new KeyValuePair<int, string>(0, expr);
         }
 
-        public static KeyValuePair<int, string> LineExecHook(int statementId, int lineNo)
+        public static KeyValuePair<int, string> LineExecHook(int statementId, int lineNo, string methodRunState)
         {
-            string expr = string.Format("CodeHooks.Instance().LogLineRun(mrid, {0}, CodeHooks.Now());\n\n", lineNo);
+			string expr = string.Format("CodeHooks.Instance().LogLineRun(mrid, {0}, CodeHooks.Now(), \"{1}\");\n\n", lineNo, methodRunState);
             return new KeyValuePair<int, string>(statementId, expr);
         }
     }
