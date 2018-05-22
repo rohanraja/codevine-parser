@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CodePraser;
+using CodeParserCommon;
 
 namespace CodeParserTests
 {

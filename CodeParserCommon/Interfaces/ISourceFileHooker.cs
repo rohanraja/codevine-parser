@@ -1,7 +1,4 @@
-﻿using CodePraser.HooksInjection;
-using CodeParserCommon;
-
-namespace CodePraser
+﻿namespace CodeParserCommon
 {
     public interface ISourceFileHooker
     {

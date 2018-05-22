@@ -1,5 +1,4 @@
-﻿using CodeParserCommon;
-namespace CodePraser
+﻿namespace CodeParserCommon
 {
     public interface IProjectParser
     {

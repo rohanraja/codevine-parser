@@ -1,5 +1,6 @@
 ﻿using System;
 using LibGit2Sharp;
+using CodeParserCommon;
 
 namespace CodePraser
 {
