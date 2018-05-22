@@ -68,10 +68,7 @@ namespace CodeParserTests
 		[TestMethod]
         public void TestHooksRenderer_UNIT()
 		{
-			List<CodeBlock> blocks = GenerateTestCodeBlock();
-
-            CodeblocksToHooksGenerator gen = new CodeblocksToHooksGenerator();
-            var hooksList = gen.GenerateHooks(blocks);
+			List<Hooks> hooksList = PipelineComponentsFactory.GenerateHookList(sourceFile);
 
             HooksRenderer hooksRenderer = new HooksRenderer();
             string outText = hooksRenderer.GetHookedCode(sourceFile, hooksList);
@@ -83,20 +80,10 @@ namespace CodeParserTests
 
 		}
 
-		private List<CodeBlock> GenerateTestCodeBlock()
-		{
-			List<CodeBlock> blocks = new List<CodeBlock>() { };
-			CodeBlock codeBlock = new CodeBlock(sourceFile, "MethodA_1", new Location(1, 0), true);
-			codeBlock.AddStatement(new Statement(new Location(1, 0), 19));
-			blocks.Add(null);
-			blocks.Add(codeBlock);
-			return blocks;
-		}
-
 		[TestMethod]
 		public void TestCodeBlockToHooksGenerator_UNIT()
 		{
-			List<CodeBlock> blocks = GenerateTestCodeBlock();
+			List<CodeBlock> blocks = PipelineComponentsFactory.GenerateTestCodeBlock(sourceFile);
 
 			CodeblocksToHooksGenerator gen = new CodeblocksToHooksGenerator();
 
