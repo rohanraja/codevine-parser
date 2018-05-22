@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodePraser.HooksInjection;
-using CodeReader;
 
-namespace CodePraser
+namespace CodeParserCommon
 {
     public class SourceCodeInfo
 	{

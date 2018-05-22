@@ -4,6 +4,7 @@ using CodePraser.PipelineComponents.HooksInjection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using CodeParserCommon;
 
 namespace CodePraser.HooksInjection
 {

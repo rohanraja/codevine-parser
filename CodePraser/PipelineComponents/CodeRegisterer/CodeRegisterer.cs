@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeParserCommon;
 using CodePraser.HooksInjection;
 using CodeReader;
 using CodeRecordHelpers;

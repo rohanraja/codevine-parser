@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Buildalyzer;
 using Microsoft.CodeAnalysis;
+using CodeParserCommon;
 
 namespace CodePraser
 {

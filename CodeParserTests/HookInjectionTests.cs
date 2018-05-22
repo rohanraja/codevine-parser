@@ -4,6 +4,7 @@ using CodePraser.HooksInjection;
 using System.IO;
 using System.Collections.Generic;
 using CodePraser.PipelineComponents.HooksInjection;
+using CodeParserCommon;
 
 namespace CodeParserTests
 {

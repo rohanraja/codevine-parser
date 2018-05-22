@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeParserCommon;
 namespace CodePraser
 {
 	public class ProjectHookingPipeline

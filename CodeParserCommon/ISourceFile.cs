@@ -1,4 +1,4 @@
-﻿namespace CodePraser
+﻿namespace CodeParserCommon
 {
     public interface ISourceFile
     {

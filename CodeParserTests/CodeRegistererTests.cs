@@ -2,6 +2,7 @@
 using CodePraser;
 using CodeRecordHelpers;
 using Moq;
+using CodeParserCommon;
 
 namespace CodeParserTests
 {

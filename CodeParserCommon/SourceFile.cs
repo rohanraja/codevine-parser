@@ -1,7 +1,6 @@
 ﻿using System;
-using CodeReader;
 
-namespace CodePraser
+namespace CodeParserCommon
 {
     public class SourceFile : ISourceFile
 	{

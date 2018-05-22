@@ -1,4 +1,5 @@
 ﻿using CodePraser.PipelineComponents.HooksInjection;
+using CodeParserCommon;
 
 namespace CodePraser.HooksInjection
 {

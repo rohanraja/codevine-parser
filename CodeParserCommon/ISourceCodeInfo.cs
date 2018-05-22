@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CodePraser
+namespace CodeParserCommon
 {
     public interface ISourceCodeInfo
     {

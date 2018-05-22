@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeReader;
+using CodeParserCommon;
 
 namespace CodePraser
 {

@@ -1,4 +1,5 @@
-﻿namespace CodePraser
+﻿using CodeParserCommon;
+namespace CodePraser
 {
     public interface ICodeRegisterer
     {

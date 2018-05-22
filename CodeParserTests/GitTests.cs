@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CodePraser;
 using System;
+using CodeParserCommon;
 
 namespace CodeParserTests
 {
@@ -19,9 +20,9 @@ namespace CodeParserTests
 			git.ResetHard(RepoPath);
         }
 
-        internal static SourceCodeInfo GetSourceCode()
-        {
-            throw new NotImplementedException();
-        }
-    }
+		internal static SourceCodeInfo GetSourceCode()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

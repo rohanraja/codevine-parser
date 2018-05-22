@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodePraser;
 using CodePraser.HooksInjection;
 using CodePraser.PipelineComponents.HooksInjection;
+using CodeParserCommon;
 
 namespace CodeParserTests
 {
