@@ -57,11 +57,11 @@ namespace HooksInjector
 			int lineNo = GetLine(statement.Span);
 			string methodRunningState = "RUNNING";
 			if (id == 0)
-				methodRunningState = "ENTERED";
+				methodRunningState += ",ENTERED";
 			// ToDo: Extract constants like "ENTERED" to global vars
 
 			if (id == count-1)
-                methodRunningState = "EXITING";
+                methodRunningState += ",EXITING";
 			// ToDo: Check exitied for exception, return statements in ifs also
 
 			return new Statement(new Location(blockId, id) , lineNo, methodRunningState );
