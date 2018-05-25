@@ -10,6 +10,7 @@ namespace HooksInjector
 {
     public class CodeBlockCollector : CSharpSyntaxWalker
     {
+		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 		private readonly SourceFile sourceFile;
 		public List<CodeBlock> CodeBlocks;
 		SyntaxTree tree;
@@ -27,16 +28,20 @@ namespace HooksInjector
 			string methodName = "";
 			bool isMethod = false;
 
+			log.DebugFormat("Block Parent type: {0}, at blockId {1}", node.Parent.GetType().Name, blockId);
+
 			if(node.Parent is MethodDeclarationSyntax)
 			{
 				methodName = ((MethodDeclarationSyntax)node.Parent).Identifier.Text;
 				isMethod = true;
+				log.Debug(new { methodName });
 			}
 
 			if (node.Parent is ConstructorDeclarationSyntax)
             {
 				methodName = ((ConstructorDeclarationSyntax)node.Parent).Identifier.Text;
                 isMethod = true;
+				log.Debug(new { methodName });
             }
 			var cb = CreateCodeBlock(methodName, isMethod);
 

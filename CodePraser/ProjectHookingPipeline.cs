@@ -9,6 +9,7 @@ namespace CodePraser
 		private ICodeRegisterer codeRegisterer;
 		private IGitHelpers git;
 		private IProjectParser projParser;
+		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public ProjectHookingPipeline(
 			ISourceFileHooker sourceHooker,
@@ -27,6 +28,8 @@ namespace CodePraser
         
 		public void Run(string projectPath, string projectFileName)
 		{
+			log.Info(new { projectPath, projectFileName });
+
 			var sourceCodeInfo = projParser.GetSourceCodeInfo(projectPath, projectFileName);
 
             git.ResetHard(sourceCodeInfo.BaseDirPath);
