@@ -9,7 +9,7 @@ namespace CodeVine_Parser
         {
             Console.WriteLine("Arming Project for Code Recording");
 
-            string RepoPath = "/Users/rohan/code/codevine_parser/CodeVine_Parser/TestCSharpProject";
+            string RepoPath = @"C:\src\codevine-parser\TestCSharpProject";
 
             string RepoCsProj = "TestCSharpProject.csproj";
 

@@ -7,7 +7,7 @@ namespace HooksInjectorTests
 	[TestClass]
     public class GitTests
     {
-		public static string RepoPath = "/Users/rohan/code/codevine_parser/CodeVine_Parser/TestCSharpProject";
+		public static string RepoPath = @"C:\src\codevine-parser\TestCSharpProject";
 
 		public static string RepoCsProj = "TestCSharpProject.csproj";
 
