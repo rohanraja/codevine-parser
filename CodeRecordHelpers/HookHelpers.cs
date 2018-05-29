@@ -33,6 +33,7 @@ namespace CodeRecordHelpers
         private void EnqueueResqueMessage(string key, string railsClassName, List<string> strArgs)
         {
 
+            Console.WriteLine("Dispatching Message: " + key);
             ResqueMessage remsg = new ResqueMessage();
             remsg.Class = railsClassName;
             remsg.args = strArgs;

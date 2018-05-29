@@ -12,9 +12,9 @@ namespace CodeVine_Parser
         static void Main(string[] args)
         {
 
-            string RepoPath = @"C:\src\TestCodeVine1\TestCodeVine1";
+            string RepoPath = @"C:\src\TestCodeVine2\Plugins";
 
-            string RepoCsProj = "TestCodeVine1.csproj";
+            string RepoCsProj = "ProductManagementPlugins.csproj";
 
 			if(args.GetLength(0) > 0)
 			{
