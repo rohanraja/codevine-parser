@@ -9,13 +9,17 @@ namespace CodePraser
 {
     public class BuildalyzerProjectParser : IProjectParser
 	{
+		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 		public BuildalyzerProjectParser()
 		{
 		}
 
 		public SourceCodeInfo GetSourceCodeInfo(string rootDir, string proName)
 		{
-			
+
+			log.Debug(new { rootDir, proName });
+
 			var sln = Path.Combine(rootDir, proName);
             AnalyzerManager manager = new AnalyzerManager();
             var pro = manager.GetProject(sln);
