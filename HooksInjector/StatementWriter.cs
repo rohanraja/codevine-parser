@@ -22,7 +22,7 @@ namespace HooksInjector
 		{
 			int thisBlockId = blockId + 0;
 			blockId++;
-			node = base.VisitBlock(node) as BlockSyntax ;
+			node = base.VisitBlock(node) as BlockSyntax;
 
 			var codeblock = getCurrentBlock(thisBlockId);
 
