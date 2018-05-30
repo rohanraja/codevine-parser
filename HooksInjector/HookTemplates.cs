@@ -8,6 +8,7 @@ namespace HooksInjector
         public static KeyValuePair<int, string> MethodEnterHook(string filePath, string methodName)
         {
             string expr = string.Format("var mrid = CodeHooks.Instance().OnMethodEnter(@\"{0}\", \"{1}\");\n\n", filePath, methodName);
+            expr = methodName == "" ? "" : expr;
             return new KeyValuePair<int, string>(0, expr);
         }
 

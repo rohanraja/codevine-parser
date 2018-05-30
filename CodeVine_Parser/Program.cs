@@ -11,7 +11,6 @@ namespace CodeVine_Parser
 
         static void Main(string[] args)
         {
-
             string RepoPath = @"C:\src\TestCodeVine2\Plugins";
 
             string RepoCsProj = "ProductManagementPlugins.csproj";

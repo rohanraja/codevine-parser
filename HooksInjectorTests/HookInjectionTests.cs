@@ -92,7 +92,7 @@ namespace HooksInjectorTests
 
 			Assert.IsTrue(hooksList.Count > 0);
 			Assert.IsTrue(hooksList[1].Pairs[1].Key == 0);
-			Assert.IsTrue(hooksList[1].Pairs[0].Value.Contains("var mrid = CodeHooks.Instance().OnMethodEnter(\"ClassA.cs\", \"MethodA_1\");\n\n"));
+			Assert.IsTrue(hooksList[1].Pairs[0].Value.Contains("var mrid = CodeHooks.Instance().OnMethodEnter(@\"ClassA.cs\", \"MethodA_1\");\n\n"));
 			Assert.IsTrue(hooksList[1].Pairs[1].Value.Contains("CodeHooks.Instance().LogLineRun(mrid, 19"));
             
 		}

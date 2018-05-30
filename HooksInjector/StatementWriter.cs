@@ -20,16 +20,18 @@ namespace HooksInjector
 
 		public override SyntaxNode VisitBlock(BlockSyntax node)
 		{
-			var codeblock = getCurrentBlock();
+			int thisBlockId = blockId + 0;
+			blockId++;
+			node = base.VisitBlock(node) as BlockSyntax ;
+
+			var codeblock = getCurrentBlock(thisBlockId);
 
 			if (codeblock == null)
 			{
-				blockId++;
 				return base.VisitBlock(node);
 			}
 
 			var newStments = CreateNewStatements(codeblock, node.Statements);
-			blockId++;
 			return node.WithStatements(newStments);
 		}
 
@@ -49,11 +51,11 @@ namespace HooksInjector
 			return outStatements;
 		}
         
-		Hooks getCurrentBlock()
+		Hooks getCurrentBlock(int bid)
 		{
-			if (blockId >= hooksList.Count)
+			if (bid >= hooksList.Count)
 				return null;
-			return hooksList[blockId];
+			return hooksList[bid];
 		}
 
 		public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)
