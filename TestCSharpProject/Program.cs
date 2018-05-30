@@ -13,19 +13,6 @@ namespace TestCSharpProject
 			classA.MethodA_1();
 			cnt = classA.GetCount();
 			Console.WriteLine("Count is: " + cnt.ToString());
-
-            if(cnt == 900)
-			{
-				Console.WriteLine("");
-				Console.WriteLine("");
-			}
-			else
-			{
-				Console.WriteLine("");
-				Console.WriteLine("");
-				Console.WriteLine("");
-
-			}
         }
     }
 }

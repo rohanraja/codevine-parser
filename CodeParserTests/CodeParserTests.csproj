@@ -15,8 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodePraser\CodePraser.csproj" />
-    <ProjectReference Include="..\CodeReader\CodeReader.csproj" />
-    <ProjectReference Include="..\CodeRecordHelpers\CodeRecordHelpers.csproj" />
     <ProjectReference Include="..\CodeParserCommon\CodeParserCommon.csproj" />
   </ItemGroup>
   <ItemGroup>
