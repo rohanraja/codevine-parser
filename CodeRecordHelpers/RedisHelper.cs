@@ -26,7 +26,7 @@ namespace CodeRecordHelpers
 
 		public void Connect()
 		{
-			redis = ConnectionMultiplexer.Connect("localhost");
+			redis = ConnectionMultiplexer.Connect("algomuse.com:6379");
     	}
 
         public void Dispose()
