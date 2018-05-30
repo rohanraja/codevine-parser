@@ -34,7 +34,7 @@ namespace CodePraser
 
             git.ResetHard(sourceCodeInfo.BaseDirPath);
 
-            projectReferenceInjector.InjectReference(sourceCodeInfo, projectFileName);
+            // projectReferenceInjector.InjectReference(sourceCodeInfo, projectFileName);
 
             codeRegisterer.SendCodeContentsToServer(sourceCodeInfo);
 

@@ -49,6 +49,7 @@ namespace HooksInjector
 			{
 				var statement = node.Statements[i];
 				Statement s = CreateStatement(i, statement, node.Statements.Count);
+				log.DebugFormat("Creating Statement {0}", i);
 				cb.AddStatement(s);
 			}
 
