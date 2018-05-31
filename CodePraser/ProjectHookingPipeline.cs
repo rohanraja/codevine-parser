@@ -30,17 +30,17 @@ namespace CodePraser
 		{
 			log.Info(new { projectPath, projectFileName });
 
-			var sourceCodeInfo = projParser.GetSourceCodeInfo(projectPath, projectFileName);
+            var sourceCodeInfo = projParser.GetSourceCodeInfo(projectPath, projectFileName);
 
-            git.ResetHard(sourceCodeInfo.BaseDirPath);
+            // git.ResetHard(sourceCodeInfo.BaseDirPath);
 
-            // projectReferenceInjector.InjectReference(sourceCodeInfo, projectFileName);
+            projectReferenceInjector.InjectReference(sourceCodeInfo, projectFileName);
 
-            codeRegisterer.SendCodeContentsToServer(sourceCodeInfo);
+            //codeRegisterer.SendCodeContentsToServer(sourceCodeInfo);
 
-			sourceFileHooker.AddHooksToSourceCode(sourceCodeInfo);
+            //sourceFileHooker.AddHooksToSourceCode(sourceCodeInfo);
 
-		}
+        }
 
-	}
+    }
 }
