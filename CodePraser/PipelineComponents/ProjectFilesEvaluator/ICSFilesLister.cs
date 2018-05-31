@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CodePraser
 {
-    interface ICSFilesLister
+    public interface ICSFilesLister
     {
         List<string> GetCSCodeFiles(string projPath);
     }
