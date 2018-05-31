@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Buildalyzer;
-using Microsoft.CodeAnalysis;
 using CodeParserCommon;
 
 namespace CodePraser
@@ -11,8 +9,11 @@ namespace CodePraser
 	{
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        ICSFilesLister cSFilesLister = null;
+
 		public BuildalyzerProjectParser()
 		{
+            cSFilesLister = new BuildAlyzerLister();
 		}
 
 		public SourceCodeInfo GetSourceCodeInfo(string rootDir, string proName)
@@ -29,7 +30,7 @@ namespace CodePraser
             try
             {
                 log.Debug("Attempting to analyze CSPROJ and fetch code files");
-                csFiles = GetCSCodeFiles(fullProjPath);
+                csFiles = cSFilesLister.GetCSCodeFiles(fullProjPath);
                 log.InfoFormat("Found {0} CS Code files in this project", csFiles.Count);
                 log.Debug(csFiles.ToArray()) ;
             }
@@ -47,24 +48,6 @@ namespace CodePraser
 
 		}
 
-        public List<string> GetCSCodeFiles(string projPath)
-        {
-            AnalyzerManager manager = new AnalyzerManager();
-            var pro = manager.GetProject(projPath);
-            var pro2 = pro.Load();
-
-            List<string> outP = new List<string>() { };
-
-            foreach (var item in pro2.Items)
-            {
-                if (item.ItemType == "Compile")
-                {
-                    outP.Add(item.EvaluatedInclude);
-                }
-            }
-
-            return outP;
-        }
 
 	}
 }
