@@ -48,7 +48,7 @@ namespace HooksInjector
 			for (int i = 0; i < node.Statements.Count; i++)
 			{
 				var statement = node.Statements[i];
-				Statement s = CreateStatement(i, statement, node.Statements.Count);
+				Statement s = CreateStatement(i, statement, node.Statements.Count, isMethod);
 				log.DebugFormat("Creating Statement {0}", i);
 				cb.AddStatement(s);
 			}
@@ -58,15 +58,15 @@ namespace HooksInjector
 			base.VisitBlock(node);
 		}
 
-		private Statement CreateStatement(int id, StatementSyntax statement, int count)
+		private Statement CreateStatement(int id, StatementSyntax statement, int count, bool isMethod)
 		{
 			int lineNo = GetLine(statement.Span);
 			string methodRunningState = "RUNNING";
-			if (id == 0)
+			if (id == 0 && isMethod)
 				methodRunningState += ",ENTERED";
 			// ToDo: Extract constants like "ENTERED" to global vars
 
-			if (id == count-1)
+			if (id == count-1 && isMethod)
                 methodRunningState += ",EXITING";
 			// ToDo: Check exitied for exception, return statements in ifs also
 
