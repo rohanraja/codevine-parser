@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using HooksInjector;
 
 namespace CodePraser
@@ -12,6 +13,11 @@ namespace CodePraser
         {
 			ProjectPath = projectPath;
 			ProjectFileName = projectFileName;
+		}
+		public PipelineRunner(string fullProjPath)
+        {
+			ProjectPath = Path.GetDirectoryName(fullProjPath);
+			ProjectFileName = Path.GetFileName(fullProjPath);
 		}
 
 		public string ProjectPath { get; }

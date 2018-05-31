@@ -11,21 +11,19 @@ namespace CodeVine_Parser
 
         static void Main(string[] args)
         {
-            string RepoPath = @"C:\src\CRM.Solutions.Sales\solutions\Sales\SalesUnifiedClientNavigation";
-
-            string RepoCsProj = "SalesUnifiedClientNavigation.csproj";
+            string RepoCsProj = @"C:\src\CRM.Solutions.Sales\solutions\Sales\Plugins\SalesPlugins.csproj";
 
 			if(args.GetLength(0) > 0)
 			{
-				RepoPath = args[0];
-				RepoCsProj = args[1];
+				RepoCsProj = args[0];
 			}
 
 			log.Info("Parsing Project for Code Recording");
-			log.Info(new {RepoPath, RepoCsProj});
+			log.Info(new {RepoCsProj});
 
-			var piplineRunner = new PipelineRunner(RepoPath, RepoCsProj);
+			var piplineRunner = new PipelineRunner(RepoCsProj);
 			piplineRunner.RunPipeLine();
+            Console.ReadKey();
         }
     }
 }
