@@ -43,6 +43,22 @@ namespace HooksInjector
                 isMethod = true;
 				log.Debug(new { methodName });
             }
+
+            if(node.Parent is AccessorDeclarationSyntax)
+            {
+                var par = ((AccessorDeclarationSyntax)(node.Parent));
+                var attrPar = par.Parent.Parent as PropertyDeclarationSyntax;
+                string attrName = attrPar.Identifier.Text;
+                isMethod = true;
+                string mtype = "set";
+
+                if (par.Kind().ToString().ToLower().Contains("get"))
+                    mtype = "get";
+
+                methodName = attrName + "." + mtype;
+				log.Debug(new { methodName });
+            }
+
 			var cb = CreateCodeBlock(methodName, isMethod);
 
 			for (int i = 0; i < node.Statements.Count; i++)

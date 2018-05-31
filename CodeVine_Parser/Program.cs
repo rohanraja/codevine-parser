@@ -11,9 +11,9 @@ namespace CodeVine_Parser
 
         static void Main(string[] args)
         {
-            string RepoPath = @"C:\src\CRM.Solutions.Sales\solutions\Sales\Plugins";
+            string RepoPath = @"C:\src\CRM.Solutions.Sales\solutions\Sales\SalesUnifiedClientNavigation";
 
-            string RepoCsProj = "SalesPlugins.csproj";
+            string RepoCsProj = "SalesUnifiedClientNavigation.csproj";
 
 			if(args.GetLength(0) > 0)
 			{
