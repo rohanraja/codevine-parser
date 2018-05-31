@@ -23,7 +23,6 @@ namespace CodeVine_Parser
 
 			var piplineRunner = new PipelineRunner(RepoCsProj);
 			piplineRunner.RunPipeLine();
-            Console.ReadKey();
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
+using CodeParserCommon;
 using HooksInjector;
 
 namespace CodePraser
@@ -25,11 +27,18 @@ namespace CodePraser
 
 		public void RunPipeLine()
 		{
+			bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
 			log.Debug("Instantiating Pipleline Dependencies");
 			var sourceHooker = new SourceFileHooker();
 			var git = new GitHelpers();
-			var projectReferenceInjector = new ProjectReferenceInjector();
+
+			IProjectReferenceInjector projectReferenceInjector = new ProjectReferenceInjector();
+
+
+			if (!isWindows)
+				projectReferenceInjector = new MacDevReferenceInjector();
+
 			var codeRegisterer = new CodeRegisterer();
 			var projParser = new BuildalyzerProjectParser();
 
