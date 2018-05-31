@@ -26,7 +26,7 @@ namespace CodeParserTests
             if (!isWindows)
                 return;
 
-            ICSFilesLister lister = new BuildAlyzerLister();
+            ICSFilesLister lister = new CRM_Solutions_CSFileLister_Decorator();
             var expectedFIles = new List<string> {};
 
             string projPath = GitTests.SalesPluginProjPath;

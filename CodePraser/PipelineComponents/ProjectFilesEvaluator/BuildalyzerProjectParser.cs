@@ -13,7 +13,7 @@ namespace CodePraser
 
 		public BuildalyzerProjectParser()
 		{
-            cSFilesLister = new BuildAlyzerLister();
+            cSFilesLister = new CRM_Solutions_CSFileLister_Decorator();
 		}
 
 		public SourceCodeInfo GetSourceCodeInfo(string rootDir, string proName)
