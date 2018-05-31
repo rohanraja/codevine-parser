@@ -20,24 +20,51 @@ namespace CodePraser
 
 			log.Debug(new { rootDir, proName });
 
-			var sln = Path.Combine(rootDir, proName);
-            AnalyzerManager manager = new AnalyzerManager();
-            var pro = manager.GetProject(sln);
-            var pro2 = pro.Load();
-
             var sourceCodeInfo = new SourceCodeInfo(rootDir);
 
-            foreach (var item in pro2.Items)
+			var fullProjPath = Path.Combine(rootDir, proName);
+
+            List<string> csFiles = new List<string>() { };
+
+            try
             {
-                if (item.ItemType == "Compile")
-                {
-                    sourceCodeInfo.AddCodeFile(item.EvaluatedInclude);
-                }
+                log.Debug("Attempting to analyze CSPROJ and fetch code files");
+                csFiles = GetCSCodeFiles(fullProjPath);
+                log.InfoFormat("Found {0} CS Code files in this project", csFiles.Count);
+                log.Debug(csFiles.ToArray()) ;
+            }
+            catch(Exception e)
+            {
+                log.Error("Error in analyzing CSPROJ", e);
+            }
+
+            foreach (var item in csFiles)
+            {
+                sourceCodeInfo.AddCodeFile(item);
             }
 
 			return sourceCodeInfo;
 
 		}
+
+        public List<string> GetCSCodeFiles(string projPath)
+        {
+            AnalyzerManager manager = new AnalyzerManager();
+            var pro = manager.GetProject(projPath);
+            var pro2 = pro.Load();
+
+            List<string> outP = new List<string>() { };
+
+            foreach (var item in pro2.Items)
+            {
+                if (item.ItemType == "Compile")
+                {
+                    outP.Add(item.EvaluatedInclude);
+                }
+            }
+
+            return outP;
+        }
 
 	}
 }
