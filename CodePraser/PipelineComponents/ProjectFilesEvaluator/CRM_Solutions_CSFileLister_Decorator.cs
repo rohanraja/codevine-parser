@@ -32,7 +32,7 @@ namespace CodePraser
             for(int i=0; i< imports.Count; i++)
             {
                 var item = imports.Item(i);
-                if (item.OuterXml.Contains("PluginAssembly.target"))
+                if (item.OuterXml.Contains(".target"))
                     item.ParentNode.RemoveChild(item);
             }
             return xml.OuterXml;
