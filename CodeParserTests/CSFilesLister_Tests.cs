@@ -15,7 +15,13 @@ namespace CodeParserTests
         public void TestBuildAlayzerLister()
         {
             ICSFilesLister lister = new BuildAlyzerLister();
-            var expectedFIles = new List<string> { "Program.cs", "ClassA.cs", "ClassB.cs" };
+            var expectedFIles = new List<string> {
+                "Program.cs",
+                "ClassA.cs",
+                "ClassB.cs",
+                "ClassWithGetter.cs",
+                "WithSetter.cs",
+            };
 			RunListerTests(lister, GitTests.FullProjPath, expectedFIles);
         }
 

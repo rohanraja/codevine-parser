@@ -10,8 +10,7 @@ namespace HooksInjectorTests
 		public static SourceFile GetSourceFileForFile(string fname)
         {
             var dir = GitTests.RepoPath;
-            var fName = "ClassA.cs";
-            return new SourceFile(fName, dir);
+            return new SourceFile(fname, dir);
         }
 
 		public static List<CodeBlock> GenerateTestCodeBlock(SourceFile sourceFile)
