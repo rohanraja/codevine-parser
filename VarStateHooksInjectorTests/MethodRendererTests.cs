@@ -36,6 +36,9 @@ namespace VarStateHooksInjectorTests
                 count ++;
             }
             """;
+
+			Dictionary<int, string> renderingInfo = new Dictionary<int, string>() { };
+
 			int expectedStatementCount = 2;
 
 			List<string> expectedStatementSubStrings = new List<string>(){
@@ -43,23 +46,8 @@ namespace VarStateHooksInjectorTests
 				"count ++"
 			};
 
-			RunBlockRenderTest(testMethod, expectedStatementCount, expectedStatementSubStrings);
-
+			Helpers.RunBlockRenderTest(testMethod, renderingInfo, expectedStatementCount, expectedStatementSubStrings);
 		}
 
-		private static void RunBlockRenderTest(string testMethod, int expectedStatementCount, List<string> expectedStatementSubStrings)
-		{
-			MethodDeclarationSyntax methSyntax = Helpers.ParseMethodSyntax(testMethod);
-			CodeRunnerBlockWriter methSyntxWriter = CodeRunnerBlockWriter.GetWriter();
-			CodeRunBlockRenderingInfo methodRenderingInfo = new CodeRunBlockRenderingInfo();
-			BlockSyntax newBlock = methSyntxWriter.RenderMethodInfo(methodRenderingInfo, methSyntax.Body);
-
-			Assert.IsTrue(newBlock.Statements.Count == expectedStatementCount);
-
-			for (int i = 0; i < expectedStatementSubStrings.Count; i++)
-			{
-				Assert.IsTrue(newBlock.Statements[i].GetText().ToString().Contains(expectedStatementSubStrings[i]));
-			}
-		}
 	}
 }
