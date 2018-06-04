@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VarStateHooksInjector;
 using VarStateHooksInjector.Entities;
+using Microsoft.CodeAnalysis;
 
 namespace VarStateHooksInjectorTests
 {
-    public class Helpers
+
+	public class Helpers
     {
         public Helpers()
         {
@@ -32,12 +34,21 @@ namespace VarStateHooksInjectorTests
 			CodeRunBlockRenderingInfo methodRenderingInfo = createRenderingInfoFromDict(renderingInfo);
             BlockSyntax newBlock = methSyntxWriter.RenderMethodInfo(methodRenderingInfo, methSyntax.Body);
 
-            Assert.IsTrue(newBlock.Statements.Count == expectedStatementCount);
+			var statements = getAllStatements(newBlock);
+
+            Assert.IsTrue(statements.Count == expectedStatementCount);
 
             for (int i = 0; i < expectedStatementSubStrings.Count; i++)
             {
-                Assert.IsTrue(newBlock.Statements[i].GetText().ToString().Contains(expectedStatementSubStrings[i]));
+				Assert.IsTrue(statements[i].GetText().ToString().Contains(expectedStatementSubStrings[i]));
             }
+		}
+
+		private static List<StatementSyntax> getAllStatements(BlockSyntax block)
+		{
+			var stateColl = new StatementsCollector();
+			stateColl.Visit(block);
+			return stateColl.Statements;
 		}
 
 		internal static CodeRunBlockRenderingInfo createRenderingInfoFromDict(Dictionary<int, List<string>> renderingInfo)
