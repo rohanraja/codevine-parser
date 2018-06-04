@@ -25,7 +25,7 @@ namespace VarStateHooksInjectorTests
         {
         }
 
-		internal static void RunBlockRenderTest(string testMethod, Dictionary<int, string> renderingInfo, int expectedStatementCount, List<string> expectedStatementSubStrings)
+		internal static void RunBlockRenderTest(string testMethod, Dictionary<int, List<string>> renderingInfo, int expectedStatementCount, List<string> expectedStatementSubStrings)
 		{
 			MethodDeclarationSyntax methSyntax = Helpers.ParseMethodSyntax(testMethod);
             CodeRunnerBlockWriter methSyntxWriter = CodeRunnerBlockWriter.GetWriter();
@@ -40,7 +40,7 @@ namespace VarStateHooksInjectorTests
             }
 		}
 
-		internal static CodeRunBlockRenderingInfo createRenderingInfoFromDict(Dictionary<int, string> renderingInfo)
+		internal static CodeRunBlockRenderingInfo createRenderingInfoFromDict(Dictionary<int, List<string>> renderingInfo)
 		{
 			return new CodeRunBlockRenderingInfo();
 		}
