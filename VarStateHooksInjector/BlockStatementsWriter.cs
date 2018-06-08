@@ -8,7 +8,7 @@ using VarStateHooksInjector.Entities;
 
 namespace VarStateHooksInjector
 {
-	public class BlockStatementsWriter : CSharpSyntaxRewriter
+	internal class BlockStatementsWriter : CSharpSyntaxRewriter
     {
 		private readonly CodeRunBlockRenderingInfo info;
 		int blockId = 0;
