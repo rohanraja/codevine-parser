@@ -24,10 +24,13 @@ namespace VarStateHooksInjectorTests
 		public static TestCase GetSimple2LineMethodCase()
 		{
 			string testMethod = @""" 
-            void MethodA()
+            class TestClass
             {
-                int count = 0;
-                count ++;
+                void MethodA()
+                {
+                    int count = 0;
+                    count ++;
+                }
             }
             """;
 			ClassInfo classInfo = FactoryHelper.CreateClassInfo();
@@ -51,7 +54,7 @@ namespace VarStateHooksInjectorTests
                 "count ++",
             };
 
-			SyntaxNode methSyntax = Helpers.ParseMethodSyntax(testMethod);
+			SyntaxNode methSyntax = Helpers.GetFirstMethodSyntax(testMethod);
 
 			return new TestCase
 			{
@@ -67,16 +70,19 @@ namespace VarStateHooksInjectorTests
 		public static TestCase GetSingleIfMethod()
         {
 			string testMethod = @""" 
-            void MethodA()
+            class TestClass
             {
-                int b=3;
-                if(true)
+                void MethodA()
                 {
-                    int count = 0;
+                    int b=3;
+                    if(true)
+                    {
+                        int count = 0;
+                    }
                 }
             }
             """;
-            MethodDeclarationSyntax methSyntax = Helpers.ParseMethodSyntax(testMethod);
+            MethodDeclarationSyntax methSyntax = Helpers.GetFirstMethodSyntax(testMethod);
             ClassInfo classInfo = FactoryHelper.CreateClassInfo();
             CodeRunnerInfo codeRunnerInfo = FactoryHelper.GenerateCodeRunnerInfo(2, 1);
             classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);

@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VarStateHooksInjector;
 using VarStateHooksInjector.Entities;
 using Microsoft.CodeAnalysis;
+using System.Linq;
 
 namespace VarStateHooksInjectorTests
 {
@@ -16,11 +17,16 @@ namespace VarStateHooksInjectorTests
         {
         }
 
-		internal static MethodDeclarationSyntax ParseMethodSyntax(string testMethod)
+		internal static MethodDeclarationSyntax GetFirstMethodSyntax(string testMethod)
 		{
-			var rt = SyntaxFactory.ParseSyntaxTree(testMethod).GetRoot();
-            MethodDeclarationSyntax methSyntax = rt.ChildThatContainsPosition(0).AsNode() as MethodDeclarationSyntax;
-			return methSyntax;
+			var root = SyntaxFactory.ParseSyntaxTree(testMethod).GetRoot();
+			var meth = from methodDeclaration in root.DescendantNodes()
+                                                    .OfType<MethodDeclarationSyntax>()
+                                                      select methodDeclaration;
+			return meth.First();
+
+   //         MethodDeclarationSyntax methSyntax = rt.ChildThatContainsPosition(0).AsNode() as MethodDeclarationSyntax;
+			//return methSyntax;
 		}
 
 		internal static void RunBlockRenderTest(string testMethod, int expectedStatementCount, List<string> expectedStatementSubStrings)
@@ -29,7 +35,7 @@ namespace VarStateHooksInjectorTests
 
 		internal static void RunBlockRenderTest(string testMethod, Dictionary<int, List<string>> renderingInfo, int expectedStatementCount, List<string> expectedStatementSubStrings)
 		{
-			MethodDeclarationSyntax methSyntax = Helpers.ParseMethodSyntax(testMethod);
+			MethodDeclarationSyntax methSyntax = Helpers.GetFirstMethodSyntax(testMethod);
 			CodeRunnerBlockRenderer methSyntxWriter = CodeRunnerBlockRenderer.GetWriter();
 			CodeRunBlockRenderingInfo methodRenderingInfo = createRenderingInfoFromDict(renderingInfo);
 			BlockSyntax newBlock = methSyntxWriter.RenderMethodInfo(methodRenderingInfo, methSyntax.Body);

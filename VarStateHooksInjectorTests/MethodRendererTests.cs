@@ -114,7 +114,7 @@ namespace VarStateHooksInjectorTests
             }
             """;
 
-			MethodDeclarationSyntax methSyntax = Helpers.ParseMethodSyntax(testMethod);
+			MethodDeclarationSyntax methSyntax = Helpers.GetFirstMethodSyntax(testMethod);
 
 			Assert.IsTrue(methSyntax.Body.Statements.Count == 2);
         }
