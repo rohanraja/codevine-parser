@@ -26,15 +26,20 @@ namespace VarStateHooksInjectorTests
         internal static T GetFirstNodeOfType<T>(string code)
 		{
 			var root = SyntaxFactory.ParseSyntaxTree(code).GetRoot();
-            var meth = from methodDeclaration in root.DescendantNodes()
-                                                    .OfType<T>()
-                       select methodDeclaration;
-            return meth.First();
+			return GetFirstNodeOfType<T>(root);
             
 		}
 		internal static MethodDeclarationSyntax GetFirstMethodSyntax(string testMethod)
 		{
 			return GetFirstNodeOfType<MethodDeclarationSyntax>(testMethod);
+		}
+
+		internal static T GetFirstNodeOfType<T>(SyntaxNode root)
+		{
+			var meth = from methodDeclaration in root.DescendantNodes()
+                                                    .OfType<T>()
+                       select methodDeclaration;
+            return meth.First();
 		}
 
 		internal static ClassDeclarationSyntax GetFirstClassSyntax(string testMethod)

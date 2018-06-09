@@ -11,21 +11,30 @@ namespace VarStateHooksInjector
     // Todo - Test that for multiple classes in one files, this visit is called! 
 	public class CSFileInfoCollector : CSharpSyntaxWalker
     {
-		List<ClassInfo> classes = new List<ClassInfo>() { };
+		CSfileInfo cSfileInfo;
 		private SyntaxTree root;
+		private readonly string fileName;
 
-		public CSFileInfoCollector(SyntaxTree tree)
+		public CSFileInfoCollector(SyntaxTree tree, string fileName)
         {
 			root = tree;
-        }
+			this.fileName = fileName;
+		}
 
 		public override void VisitClassDeclaration(ClassDeclarationSyntax node)
 		{
 			ClassInfoCollector collector = new ClassInfoCollector(root);
 			ClassInfo classInfo = collector.Collect(node);
-			classes.Add(classInfo);
+			classInfo.RelativeFilePath = fileName;
+			cSfileInfo.Classes.Add(classInfo);
 			//base.VisitClassDeclaration(node);
 		}
 
+		public CSfileInfo Collect(SyntaxNode syntaxNode)
+		{
+			cSfileInfo = new CSfileInfo();
+			this.Visit(syntaxNode);
+			return cSfileInfo;
+		}
 	}
 }

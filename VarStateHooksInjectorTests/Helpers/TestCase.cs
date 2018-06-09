@@ -16,6 +16,8 @@ namespace VarStateHooksInjectorTests
 		public SyntaxNode Node { get; private set; }
 		public Dictionary<int, List<string>> RenderInfo { get; private set; }
 		public SyntaxTree Root { get; internal set; }
+		public string FileName { get; private set; }
+		public CSfileInfo CSFileInfo { get; private set; }
 
 		public TestCase()
         {
@@ -35,20 +37,23 @@ namespace VarStateHooksInjectorTests
             }
             """;
 			ClassInfo classInfo = FactoryHelper.CreateClassInfo();
+			classInfo.RelativeFilePath = "TestFile.cs";
 
 			CodeRunnerInfo codeRunnerInfo = new CodeRunnerInfo();
-            codeRunnerInfo.Name = "TestMethod";
+            codeRunnerInfo.Name = "MethodA";
             codeRunnerInfo.IsConstructor = false;
             
             codeRunnerInfo.blockInfo[0] = new List<StatementInfo>() { };
             StatementInfo sInfo = new StatementInfo();
-            sInfo.LineNo = 5;
+			sInfo = new StatementInfo { LineNo = 5 };
             codeRunnerInfo.blockInfo[0].Add(sInfo);
-			var sInfo2 = new StatementInfo();
-            sInfo2.LineNo = 6;
-            codeRunnerInfo.blockInfo[0].Add(sInfo2);
+			sInfo = new StatementInfo { LineNo = 6 };
+            codeRunnerInfo.blockInfo[0].Add(sInfo);
 
             classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
+
+			CSfileInfo cSfileInfo = new CSfileInfo();
+			cSfileInfo.Classes.Add(classInfo);
 
 			Dictionary<int, List<string>> renderingInfo = new Dictionary<int, List<string>>() { };
             renderingInfo[0] = new List<string>(){
@@ -79,7 +84,9 @@ namespace VarStateHooksInjectorTests
                 ExpectedStatementCount = 5,
 				Node = methSyntax,
 				RenderInfo = renderingInfo,
-                Root = root
+                Root = root,
+				FileName = classInfo.RelativeFilePath,
+				CSFileInfo = cSfileInfo,
 			};
 		}
 
@@ -100,24 +107,27 @@ namespace VarStateHooksInjectorTests
             """;
             MethodDeclarationSyntax methSyntax = Helpers.GetFirstMethodSyntax(testMethod);
             ClassInfo classInfo = FactoryHelper.CreateClassInfo();
+			classInfo.RelativeFilePath = "TestFile.cs";
 
 			CodeRunnerInfo codeRunnerInfo = new CodeRunnerInfo();
-            codeRunnerInfo.Name = "TestMethod";
+            codeRunnerInfo.Name = "MethodA";
             codeRunnerInfo.IsConstructor = false;
             
             codeRunnerInfo.blockInfo[0] = new List<StatementInfo>() { };
 			codeRunnerInfo.blockInfo[1] = new List<StatementInfo>() { };
             StatementInfo sInfo = new StatementInfo();
-            sInfo.LineNo = 5;
+			sInfo = new StatementInfo { LineNo = 5 };
             codeRunnerInfo.blockInfo[0].Add(sInfo);
-			sInfo = new StatementInfo();
-            sInfo.LineNo = 6;
+			sInfo = new StatementInfo{LineNo = 6};
             codeRunnerInfo.blockInfo[0].Add(sInfo);
-            var sInfo2 = new StatementInfo();
-            sInfo2.LineNo = 8;
-            codeRunnerInfo.blockInfo[1].Add(sInfo2);
+			sInfo = new StatementInfo { LineNo = 8 };
+            codeRunnerInfo.blockInfo[1].Add(sInfo);
 
             classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
+
+			CSfileInfo cSfileInfo = new CSfileInfo();
+            cSfileInfo.Classes.Add(classInfo);
+
 			SyntaxTree root = Helpers.GetRoot(testMethod);
 
             List<string> expectedStatementSubStrings = new List<string>(){
@@ -137,7 +147,9 @@ namespace VarStateHooksInjectorTests
                 ExpectedStatements = expectedStatementSubStrings,
                 ExpectedStatementCount = 7,
                 Node = methSyntax,
-                Root = root
+                Root = root,
+				CSFileInfo = cSfileInfo,
+				FileName = classInfo.RelativeFilePath
             };
         }
     }
