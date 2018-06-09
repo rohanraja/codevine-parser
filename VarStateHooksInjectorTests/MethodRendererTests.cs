@@ -7,6 +7,7 @@ using VarStateHooksInjector.Entities;
 
 namespace VarStateHooksInjectorTests
 {
+    // Todo - Use TestCase class to generate test data
     [TestClass]
     public class MethodRendererTests
     {
