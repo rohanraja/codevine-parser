@@ -13,8 +13,20 @@ namespace VarStateHooksInjectorTests
     {
 		[TestMethod]
 		public void TestForSimple2LineBlock()
-        {
+		{
 			TestCase testCase = TestCase.GetSimple2LineMethodCase();
+			RunBlockInfoCollectionTest(testCase);
+		}
+
+		[TestMethod]
+        public void TestSingleIfConditionBlock()
+        {
+			TestCase testCase = TestCase.GetSingleIfMethod();
+            RunBlockInfoCollectionTest(testCase);
+        }
+
+		private void RunBlockInfoCollectionTest(TestCase testCase)
+		{
 			var block = Helpers.GetFirstNodeOfType<BlockSyntax>(testCase.Code);
 
 			BlockInfoCollector collector = new BlockInfoCollector(testCase.Root);
@@ -22,8 +34,7 @@ namespace VarStateHooksInjectorTests
 
 			var expectedBlockInfo = testCase.ClassInfo.GetCodeRunnerInfo(0).blockInfo;
 			CheckBlockInfoMatches(blockInfo, expectedBlockInfo);
-
-        }
+		}
 
 		private void CheckBlockInfoMatches(Dictionary<int, List<StatementInfo>> blockInfo, Dictionary<int, List<StatementInfo>> expectedBlockInfo)
 		{

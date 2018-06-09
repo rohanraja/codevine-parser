@@ -35,12 +35,12 @@ namespace VarStateHooksInjectorTests
             }
             """;
 			ClassInfo classInfo = FactoryHelper.CreateClassInfo();
+
 			CodeRunnerInfo codeRunnerInfo = new CodeRunnerInfo();
             codeRunnerInfo.Name = "TestMethod";
             codeRunnerInfo.IsConstructor = false;
             
             codeRunnerInfo.blockInfo[0] = new List<StatementInfo>() { };
-
             StatementInfo sInfo = new StatementInfo();
             sInfo.LineNo = 5;
             codeRunnerInfo.blockInfo[0].Add(sInfo);
@@ -100,8 +100,26 @@ namespace VarStateHooksInjectorTests
             """;
             MethodDeclarationSyntax methSyntax = Helpers.GetFirstMethodSyntax(testMethod);
             ClassInfo classInfo = FactoryHelper.CreateClassInfo();
-            CodeRunnerInfo codeRunnerInfo = FactoryHelper.GenerateCodeRunnerInfo(2, 1);
+
+			CodeRunnerInfo codeRunnerInfo = new CodeRunnerInfo();
+            codeRunnerInfo.Name = "TestMethod";
+            codeRunnerInfo.IsConstructor = false;
+            
+            codeRunnerInfo.blockInfo[0] = new List<StatementInfo>() { };
+			codeRunnerInfo.blockInfo[1] = new List<StatementInfo>() { };
+            StatementInfo sInfo = new StatementInfo();
+            sInfo.LineNo = 5;
+            codeRunnerInfo.blockInfo[0].Add(sInfo);
+			sInfo = new StatementInfo();
+            sInfo.LineNo = 6;
+            codeRunnerInfo.blockInfo[0].Add(sInfo);
+            var sInfo2 = new StatementInfo();
+            sInfo2.LineNo = 8;
+            codeRunnerInfo.blockInfo[1].Add(sInfo2);
+
             classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
+			SyntaxTree root = Helpers.GetRoot(testMethod);
+
             List<string> expectedStatementSubStrings = new List<string>(){
                 "OnMethodEnter",
                 "LogLineRun",
@@ -118,7 +136,8 @@ namespace VarStateHooksInjectorTests
                 ClassInfo = classInfo,
                 ExpectedStatements = expectedStatementSubStrings,
                 ExpectedStatementCount = 7,
-                Node = methSyntax
+                Node = methSyntax,
+                Root = root
             };
         }
     }
