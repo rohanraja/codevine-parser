@@ -23,7 +23,7 @@ namespace VarStateHooksInjectorTests
 			info.Name = "TestMethod";
 			info.IsConstructor = false;
 
-			info.blockInfo[0] = new List<StatementInfo>() { };
+			info.blockInfo[0] = new BlockInfo();
 
 			for (int i = 0; i < numStatements; i++)
 			{
@@ -34,7 +34,7 @@ namespace VarStateHooksInjectorTests
 
 			if(level2Staements > 0)
 			{
-				info.blockInfo[1] = new List<StatementInfo>() { };
+				info.blockInfo[1] = new BlockInfo();
 
 				for (int i = 0; i < level2Staements; i++)
                 {

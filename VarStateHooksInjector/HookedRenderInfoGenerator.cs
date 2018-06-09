@@ -26,7 +26,7 @@ namespace VarStateHooksInjector
             // Add LineExecHooks
 			foreach(int blockid in methodInfo.blockInfo.Keys)
 			{
-				var statInfos = methodInfo.blockInfo[blockid];
+				var statInfos = methodInfo.blockInfo[blockid].StatementInfos;
 				for (int i = 0; i < statInfos.Count; i++)
 				{
 					var statInfo = statInfos[i];

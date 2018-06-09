@@ -38,7 +38,7 @@ namespace VarStateHooksInjectorTests
             codeRunnerInfo.Name = "MethodA";
             codeRunnerInfo.IsConstructor = false;
             
-            codeRunnerInfo.blockInfo[0] = new List<StatementInfo>() { };
+			codeRunnerInfo.blockInfo[0] = new BlockInfo();
             StatementInfo sInfo = new StatementInfo();
 			sInfo = new StatementInfo { LineNo = 5 };
             codeRunnerInfo.blockInfo[0].Add(sInfo);
@@ -108,8 +108,8 @@ namespace VarStateHooksInjectorTests
             codeRunnerInfo.Name = "MethodA";
             codeRunnerInfo.IsConstructor = false;
             
-            codeRunnerInfo.blockInfo[0] = new List<StatementInfo>() { };
-			codeRunnerInfo.blockInfo[1] = new List<StatementInfo>() { };
+			codeRunnerInfo.blockInfo[0] = new BlockInfo();
+			codeRunnerInfo.blockInfo[1] = new BlockInfo();
             StatementInfo sInfo = new StatementInfo();
 			sInfo = new StatementInfo { LineNo = 5 };
             codeRunnerInfo.blockInfo[0].Add(sInfo);

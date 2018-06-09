@@ -8,7 +8,7 @@ namespace VarStateHooksInjector.Entities
 
 		public List<MethodArgument> Arguments = new List<MethodArgument>() { };
 
-		public Dictionary<int, List<StatementInfo>> blockInfo = new Dictionary<int, List<StatementInfo>>() { };
+		public Dictionary<int, BlockInfo> blockInfo = new Dictionary<int, BlockInfo>() { };
        public bool IsConstructor;
     }
 }

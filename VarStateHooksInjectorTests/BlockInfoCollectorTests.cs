@@ -36,7 +36,7 @@ namespace VarStateHooksInjectorTests
 			CheckBlockInfoMatches(blockInfo, expectedBlockInfo);
 		}
 
-		private void CheckBlockInfoMatches(Dictionary<int, List<StatementInfo>> blockInfo, Dictionary<int, List<StatementInfo>> expectedBlockInfo)
+		private void CheckBlockInfoMatches(Dictionary<int, BlockInfo> blockInfo, Dictionary<int, BlockInfo> expectedBlockInfo)
 		{
 			Assert.IsTrue(blockInfo.Keys.Count == expectedBlockInfo.Keys.Count);
 
@@ -47,8 +47,8 @@ namespace VarStateHooksInjectorTests
 
 				for (int i = 0; i < expectedBlockInfo[key].Count; i++)
 				{
-					var s1 = blockInfo[key][i];
-					var s2 = expectedBlockInfo[key][i];
+					var s1 = blockInfo[key].StatementInfos[i];
+					var s2 = expectedBlockInfo[key].StatementInfos[i];
 					CheckStatementsMatch(s1, s2);
 				}
 			}

@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis;
 
 public class BlockInfoCollector  : CSharpSyntaxWalker
 {
-	private Dictionary<int, List<StatementInfo>> blockInfo = new Dictionary<int, List<StatementInfo>>() { };
+	private Dictionary<int, BlockInfo> blockInfo = new Dictionary<int, BlockInfo>() { };
 	SyntaxTree tree;
 	int blockId = 0;
 
@@ -17,7 +17,7 @@ public class BlockInfoCollector  : CSharpSyntaxWalker
 		tree = root;
 	}
 
-	public Dictionary<int, List<StatementInfo>> Collect(BlockSyntax body)
+	public Dictionary<int, BlockInfo> Collect(BlockSyntax body)
 	{
 		this.Visit(body);
 		return blockInfo;
@@ -36,7 +36,7 @@ public class BlockInfoCollector  : CSharpSyntaxWalker
 			statementInfos.Add(s);
         }
 
-		blockInfo[blockId] = statementInfos;
+		blockInfo[blockId] = new BlockInfo(statementInfos);
         blockId++;
         base.VisitBlock(node);
     }
