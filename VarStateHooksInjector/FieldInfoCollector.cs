@@ -9,6 +9,7 @@ class FieldInfoCollector : CSharpSyntaxWalker
 {
 	internal FieldInfo Collect(FieldDeclarationSyntax node)
 	{
-		throw new NotImplementedException();
+		//throw new NotImplementedException();
+		return new FieldInfo();
 	}
 }

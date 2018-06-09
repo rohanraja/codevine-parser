@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using CodeParserCommon;
 using HooksInjector;
+using VarStateHooksInjector;
 
 namespace CodePraser
 {
@@ -30,7 +31,10 @@ namespace CodePraser
 			bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
 			log.Debug("Instantiating Pipleline Dependencies");
-			var sourceHooker = new SourceFileHooker();
+
+			//var sourceHooker = new SourceFileHooker();
+			var sourceHooker = new VarStateSourceFileHooker();
+
 			var git = new GitHelpers();
 
 			IProjectReferenceInjector projectReferenceInjector = new ProjectReferenceInjector();

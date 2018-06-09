@@ -15,7 +15,8 @@ namespace VarStateHooksInjector
 
 		internal FieldDeclarationSyntax Generate(FieldDeclarationSyntax node, int id)
 		{
-			throw new NotImplementedException();
+			return node;
+			//throw new NotImplementedException();
 		}
 	}
 }

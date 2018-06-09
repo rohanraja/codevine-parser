@@ -13,7 +13,7 @@ namespace VarStateHooksInjector.Entities
         }
 		public void AddFieldInfo(FieldInfo fieldInfo, int id)
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 
 		public CodeRunnerInfo GetCodeRunnerInfo(int id)

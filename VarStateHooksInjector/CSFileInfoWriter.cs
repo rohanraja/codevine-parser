@@ -22,7 +22,6 @@ namespace VarStateHooksInjector
 			ClassInfoWriter writer = new ClassInfoWriter(cSfileInfo);
 			classIds++;
 			return writer.Generate(node, id);
-			//return base.VisitClassDeclaration(node);
 		}
 
 		public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)

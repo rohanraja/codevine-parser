@@ -26,7 +26,12 @@ class CodeRunnerInfoCollector
 
 	internal CodeRunnerInfo Collect(ConstructorDeclarationSyntax node)
 	{
+        // Todo - Remove this duplication
 		var info = new CodeRunnerInfo();
+		info.Name = node.Identifier.ToString();
+        info.IsConstructor = true;
+        BlockInfoCollector blockInfo = new BlockInfoCollector(root);
+        info.blockInfo = blockInfo.Collect(node.Body);
         return info;
 	}
 

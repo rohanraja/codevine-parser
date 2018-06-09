@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VarStateHooksInjector\VarStateHooksInjector.csproj" />
+    <ProjectReference Include="..\CodeParserCommon\CodeParserCommon.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
