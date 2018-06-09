@@ -16,6 +16,11 @@ namespace VarStateHooksInjector.Entities
 			throw new NotImplementedException();
 		}
 
+		internal CodeRunnerInfo GetCodeRunnerInfo(int id)
+		{
+			return CodeRunners[id];
+		}
+
 		public void AddCodeRunnerInfo(CodeRunnerInfo codeRunnerInfo, int id)
 		{
 			CodeRunners[id] = codeRunnerInfo;

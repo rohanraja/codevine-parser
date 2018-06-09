@@ -5,7 +5,7 @@ namespace VarStateHooksInjector.Entities
 {
     public class CodeRunBlockRenderingInfo
     {
-		public Dictionary<int, List<string>> renderingInfo;
+		public Dictionary<int, List<string>> renderingInfo = new Dictionary<int, List<string>>() { };
 
 		public CodeRunBlockRenderingInfo()
         {
