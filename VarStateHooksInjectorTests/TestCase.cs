@@ -14,6 +14,7 @@ namespace VarStateHooksInjectorTests
 		public List<string> ExpectedStatements { get; private set; }
         public int ExpectedStatementCount { get; private set; }
 		public SyntaxNode Node { get; private set; }
+		public Dictionary<int, List<string>> RenderInfo { get; private set; }
 
 		public TestCase()
         {
@@ -33,6 +34,15 @@ namespace VarStateHooksInjectorTests
             CodeRunnerInfo codeRunnerInfo = FactoryHelper.GenerateCodeRunnerInfo(2);
             classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
 
+			Dictionary<int, List<string>> renderingInfo = new Dictionary<int, List<string>>() { };
+            renderingInfo[0] = new List<string>(){
+				"OnMethodEnter();",
+				"LogLineRun()",
+				"0",
+				"LogLineRun()",
+				"1",
+            };
+
 			List<string> expectedStatementSubStrings = new List<string>(){
                 "OnMethodEnter",
                 "LogLineRun",
@@ -49,7 +59,8 @@ namespace VarStateHooksInjectorTests
 				ClassInfo = classInfo,
 				ExpectedStatements = expectedStatementSubStrings,
                 ExpectedStatementCount = 5,
-				Node = methSyntax
+				Node = methSyntax,
+				RenderInfo = renderingInfo
 			};
 		}
 

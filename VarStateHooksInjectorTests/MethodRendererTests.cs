@@ -99,32 +99,8 @@ namespace VarStateHooksInjectorTests
 		[TestMethod]
         public void TestRenderingSimpleMethod_WithHookStatements()
         {
-            string testMethod = @""" 
-            void MethodA()
-            {
-                int count = 0;
-                count ++;
-            }
-            """;
-
-            Dictionary<int, List<string>> renderingInfo = new Dictionary<int, List<string>>() { };
-            renderingInfo[0] = new List<string>(){
-                "0",
-                "int hook1 = 5;",
-                "1",
-                "int hook2 = 10"
-            };
-
-            int expectedStatementCount = 4;
-
-            List<string> expectedStatementSubStrings = new List<string>(){
-                "int count",
-                "int hook1 = 5;",
-                "count ++",
-                "int hook2 = 10"
-            };
-
-            Helpers.RunBlockRenderTest(testMethod, renderingInfo, expectedStatementCount, expectedStatementSubStrings);
+			TestCase testCase = TestCase.GetSimple2LineMethodCase();
+			Helpers.RunBlockRenderTest(testCase.Code, testCase.RenderInfo, testCase.ExpectedStatementCount, testCase.ExpectedStatements);
         }
 
         [TestMethod]
