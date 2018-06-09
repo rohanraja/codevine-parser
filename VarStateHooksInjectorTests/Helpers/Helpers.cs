@@ -17,6 +17,12 @@ namespace VarStateHooksInjectorTests
         {
         }
 
+		internal static SyntaxTree GetRoot(string code)
+        {
+			var root = SyntaxFactory.ParseSyntaxTree(code);
+			return root;
+        }
+
         internal static T GetFirstNodeOfType<T>(string code)
 		{
 			var root = SyntaxFactory.ParseSyntaxTree(code).GetRoot();
@@ -63,7 +69,8 @@ namespace VarStateHooksInjectorTests
 			}
 		}
 
-		public static List<StatementSyntax> getAllStatements(BlockSyntax block)
+
+        public static List<StatementSyntax> getAllStatements(BlockSyntax block)
 		{
 			var stateColl = new StatementsCollector();
 			stateColl.Visit(block);

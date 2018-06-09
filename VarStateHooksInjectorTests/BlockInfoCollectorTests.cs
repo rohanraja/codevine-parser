@@ -17,7 +17,7 @@ namespace VarStateHooksInjectorTests
 			TestCase testCase = TestCase.GetSimple2LineMethodCase();
 			var block = Helpers.GetFirstNodeOfType<BlockSyntax>(testCase.Code);
 
-			BlockInfoCollector collector = new BlockInfoCollector();
+			BlockInfoCollector collector = new BlockInfoCollector(testCase.Root);
 			var blockInfo = collector.Collect(block);
 
 			var expectedBlockInfo = testCase.ClassInfo.GetCodeRunnerInfo(0).blockInfo;

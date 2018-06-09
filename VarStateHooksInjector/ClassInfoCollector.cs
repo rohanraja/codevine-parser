@@ -12,6 +12,7 @@ namespace VarStateHooksInjector
 		public ClassInfo CollectedClassInfo { get; internal set; }
 		int fieldIds = 0;
         int codeRunnerIds = 0;
+		private SyntaxTree root;
 
 		public ClassInfo Collect(ClassDeclarationSyntax node)
 		{
@@ -19,9 +20,10 @@ namespace VarStateHooksInjector
 			return CollectedClassInfo;
 		}
 
-        public ClassInfoCollector()
+		public ClassInfoCollector(SyntaxTree tree)
         {
 			CollectedClassInfo = new ClassInfo();
+			root = tree;
         }
 
 		public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
@@ -37,7 +39,7 @@ namespace VarStateHooksInjector
 		public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
 		{
 			int id = codeRunnerIds;
-			CodeRunnerInfoCollector collector = new CodeRunnerInfoCollector();
+			CodeRunnerInfoCollector collector = new CodeRunnerInfoCollector(root);
 			CodeRunnerInfo codeRunnerInfo = collector.Collect(node);
 			CollectedClassInfo.AddCodeRunnerInfo(codeRunnerInfo, id);
 			codeRunnerIds++;
@@ -47,7 +49,7 @@ namespace VarStateHooksInjector
 		public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
 		{
 			int id = codeRunnerIds;
-			CodeRunnerInfoCollector collector = new CodeRunnerInfoCollector();
+			CodeRunnerInfoCollector collector = new CodeRunnerInfoCollector(root);
             CodeRunnerInfo codeRunnerInfo = collector.Collect(node);
             CollectedClassInfo.AddCodeRunnerInfo(codeRunnerInfo, id);
 			codeRunnerIds++;
@@ -57,7 +59,7 @@ namespace VarStateHooksInjector
 		public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
 		{
 			int id = codeRunnerIds;
-			CodeRunnerInfoCollector collector = new CodeRunnerInfoCollector();
+			CodeRunnerInfoCollector collector = new CodeRunnerInfoCollector(root);
             CodeRunnerInfo codeRunnerInfo = collector.Collect(node);
             CollectedClassInfo.AddCodeRunnerInfo(codeRunnerInfo, id);
 			codeRunnerIds++;

@@ -12,14 +12,16 @@ namespace VarStateHooksInjector
 	public class CSFileInfoCollector : CSharpSyntaxWalker
     {
 		List<ClassInfo> classes = new List<ClassInfo>() { };
+		private SyntaxTree root;
 
-        public CSFileInfoCollector()
+		public CSFileInfoCollector(SyntaxTree tree)
         {
+			root = tree;
         }
 
 		public override void VisitClassDeclaration(ClassDeclarationSyntax node)
 		{
-			ClassInfoCollector collector = new ClassInfoCollector();
+			ClassInfoCollector collector = new ClassInfoCollector(root);
 			ClassInfo classInfo = collector.Collect(node);
 			classes.Add(classInfo);
 			//base.VisitClassDeclaration(node);

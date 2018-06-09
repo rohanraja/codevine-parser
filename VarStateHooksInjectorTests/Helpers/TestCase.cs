@@ -15,6 +15,7 @@ namespace VarStateHooksInjectorTests
         public int ExpectedStatementCount { get; private set; }
 		public SyntaxNode Node { get; private set; }
 		public Dictionary<int, List<string>> RenderInfo { get; private set; }
+		public SyntaxTree Root { get; internal set; }
 
 		public TestCase()
         {
@@ -41,10 +42,10 @@ namespace VarStateHooksInjectorTests
             codeRunnerInfo.blockInfo[0] = new List<StatementInfo>() { };
 
             StatementInfo sInfo = new StatementInfo();
-            sInfo.LineNo = 6;
+            sInfo.LineNo = 5;
             codeRunnerInfo.blockInfo[0].Add(sInfo);
 			var sInfo2 = new StatementInfo();
-            sInfo2.LineNo = 7;
+            sInfo2.LineNo = 6;
             codeRunnerInfo.blockInfo[0].Add(sInfo2);
 
             classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
@@ -68,6 +69,8 @@ namespace VarStateHooksInjectorTests
 
 			SyntaxNode methSyntax = Helpers.GetFirstMethodSyntax(testMethod);
 
+			SyntaxTree root = Helpers.GetRoot(testMethod);
+
 			return new TestCase
 			{
 				Code = testMethod,
@@ -75,7 +78,8 @@ namespace VarStateHooksInjectorTests
 				ExpectedStatements = expectedStatementSubStrings,
                 ExpectedStatementCount = 5,
 				Node = methSyntax,
-				RenderInfo = renderingInfo
+				RenderInfo = renderingInfo,
+                Root = root
 			};
 		}
 
