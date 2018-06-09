@@ -34,7 +34,19 @@ namespace VarStateHooksInjectorTests
             }
             """;
 			ClassInfo classInfo = FactoryHelper.CreateClassInfo();
-            CodeRunnerInfo codeRunnerInfo = FactoryHelper.GenerateCodeRunnerInfo(2);
+			CodeRunnerInfo codeRunnerInfo = new CodeRunnerInfo();
+            codeRunnerInfo.Name = "TestMethod";
+            codeRunnerInfo.IsConstructor = false;
+            
+            codeRunnerInfo.blockInfo[0] = new List<StatementInfo>() { };
+
+            StatementInfo sInfo = new StatementInfo();
+            sInfo.LineNo = 6;
+            codeRunnerInfo.blockInfo[0].Add(sInfo);
+			var sInfo2 = new StatementInfo();
+            sInfo2.LineNo = 7;
+            codeRunnerInfo.blockInfo[0].Add(sInfo2);
+
             classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
 
 			Dictionary<int, List<string>> renderingInfo = new Dictionary<int, List<string>>() { };
