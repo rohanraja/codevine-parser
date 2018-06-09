@@ -1,30 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace VarStateHooksInjector.Entities
 {
     public class ClassInfo
     {
-        public ClassInfo()
+		public Dictionary<int, CodeRunnerInfo> CodeRunners = new Dictionary<int, CodeRunnerInfo>() { };
+		public string RelativeFilePath;
+
+		public ClassInfo()
         {
         }
-
-		internal void AddFieldInfo(FieldInfo fieldInfo)
+		public void AddFieldInfo(FieldInfo fieldInfo, int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		internal void AddCodeRunnerInfo(CodeRunnerInfo codeRunnerInfo)
+		public void AddCodeRunnerInfo(CodeRunnerInfo codeRunnerInfo, int id)
 		{
-			throw new NotImplementedException();
-		}
-
-		internal void AddFieldInfo(FieldInfo fieldInfo, int id)
-		{
-			throw new NotImplementedException();
-		}
-
-		internal void AddCodeRunnerInfo(CodeRunnerInfo codeRunnerInfo, int id)
-		{
-			throw new NotImplementedException();
+			CodeRunners[id] = codeRunnerInfo;
 		}
 	}
 }

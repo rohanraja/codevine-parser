@@ -1,6 +1,6 @@
 ﻿namespace VarStateHooksInjector.Entities
 {
-    public class FieldInfo
+    public class MethodArgument
     {
     }
 }

@@ -5,7 +5,7 @@ namespace VarStateHooksInjector.Entities
 {
     public class CodeRunBlockRenderingInfo
     {
-		private Dictionary<int, List<string>> renderingInfo;
+		public Dictionary<int, List<string>> renderingInfo;
 
 		public CodeRunBlockRenderingInfo()
         {
@@ -16,12 +16,12 @@ namespace VarStateHooksInjector.Entities
 			this.renderingInfo = renderingInfo;
 		}
 
-		internal bool ContainsId(int bid)
+		public bool ContainsId(int bid)
 		{
 			return renderingInfo.ContainsKey(bid);
 		}
 
-		internal List<string> GetStatementsForId(int bid)
+		public List<string> GetStatementsForId(int bid)
 		{
 			return renderingInfo[bid];
 		}

@@ -10,14 +10,18 @@ namespace VarStateHooksInjectorTests
 	[TestClass]
     public class HookedRenderInfoGeneratorTests
     {
-        public HookedRenderInfoGeneratorTests()
-        {
-        }
-
 		[TestMethod]
         public void TestMethodBlockGenerator()
 		{
-			
+			HookedRenderInfoGenerator generator = new HookedRenderInfoGenerator();
+			ClassInfo classInfo = FactoryHelper.CreateClassInfo();
+            int id = 0;
+
+            CodeRunBlockRenderingInfo renderInfo = generator.CodeRunBlockRenderInfoForMethod(classInfo, id);
+
+			Assert.IsTrue(renderInfo.renderingInfo[0][0].Contains("OnMethodEnter"));
+			Assert.IsTrue(renderInfo.renderingInfo[0][1].Contains("LogLineRun"));
+			Assert.IsTrue(renderInfo.renderingInfo[0][2].Contains("0"));
 		}
     }
 }

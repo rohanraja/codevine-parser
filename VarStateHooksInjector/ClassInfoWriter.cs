@@ -52,11 +52,16 @@ namespace VarStateHooksInjector
 
 		public override SyntaxNode VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
         {
-            int id = codeRunnerIds;
-            CodeRunnerGenerator fieldGenerator = new CodeRunnerGenerator(classInfo);
-			ConstructorDeclarationSyntax newMethod = fieldGenerator.Generate(node, id);
+			int id = codeRunnerIds;
+
+            HookedRenderInfoGenerator generator = new HookedRenderInfoGenerator();
+			CodeRunBlockRenderingInfo renderinfo = generator.CodeRunBlockRenderInfoForConstructor(classInfo, id);
+            CodeRunnerBlockRenderer renderer = CodeRunnerBlockRenderer.GetWriter();
+            var newBlock = renderer.RenderMethodInfo(renderinfo, node.Body);
+
             codeRunnerIds++;
-            return newMethod;
+            return node.WithBody(newBlock);
+
             //return base.VisitMethodDeclaration(node);
         }
 	}

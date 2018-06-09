@@ -3,14 +3,14 @@ using VarStateHooksInjector.Entities;
 
 namespace VarStateHooksInjector
 {
-	internal class HookedRenderInfoGenerator
+	public class HookedRenderInfoGenerator
 	{
-		internal CodeRunBlockRenderingInfo CodeRunBlockRenderInfoForMethod(ClassInfo classInfo, int id)
+		public CodeRunBlockRenderingInfo CodeRunBlockRenderInfoForMethod(ClassInfo classInfo, int id)
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
-		internal CodeRunBlockRenderingInfo CodeRunBlockRenderInfoForConstructor(ClassInfo classInfo, int id)
+		public CodeRunBlockRenderingInfo CodeRunBlockRenderInfoForConstructor(ClassInfo classInfo, int id)
 		{
 			throw new NotImplementedException();
 		}
