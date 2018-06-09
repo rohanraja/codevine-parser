@@ -2,5 +2,6 @@
 {
     public class FieldInfo
     {
+        public string Name;
     }
 }

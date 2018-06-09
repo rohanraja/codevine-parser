@@ -5,11 +5,17 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 
-class FieldInfoCollector : CSharpSyntaxWalker
+namespace VarStateHooksInjector
 {
-	internal FieldInfo Collect(FieldDeclarationSyntax node)
-	{
-		//throw new NotImplementedException();
-		return new FieldInfo();
-	}
+	
+    public class FieldInfoCollector : CSharpSyntaxWalker
+    {
+    	public FieldInfo Collect(FieldDeclarationSyntax node)
+    	{
+    		//throw new NotImplementedException();
+    		var finfo = new FieldInfo();
+			finfo.Name = node.Declaration.Variables[0].Identifier.ToString();
+			return finfo;
+    	}
+    }
 }

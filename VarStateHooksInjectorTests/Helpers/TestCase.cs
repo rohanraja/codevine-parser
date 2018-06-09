@@ -14,6 +14,8 @@ namespace VarStateHooksInjectorTests
 		public List<string> ExpectedStatements { get; private set; }
         public int ExpectedStatementCount { get; private set; }
 		public SyntaxNode Node { get; private set; }
+
+
 		public Dictionary<int, List<string>> RenderInfo { get; private set; }
 		public SyntaxTree Root { get; internal set; }
 		public string FileName { get; private set; }
@@ -151,6 +153,22 @@ namespace VarStateHooksInjectorTests
                 Root = root,
 				CSFileInfo = cSfileInfo,
 				FileName = classInfo.RelativeFilePath
+            };
+        }
+		internal static TestCase GetClassWithIntField()
+        {
+			string testMethod = @""" 
+            class TestClass
+            {
+                private int field1 = 50;
+                void MethodA()
+                {
+                }
+            }
+            """;
+			return new TestCase
+            {
+                Code = testMethod,
             };
         }
     }
