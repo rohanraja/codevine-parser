@@ -36,7 +36,12 @@ public class BlockInfoCollector  : CSharpSyntaxWalker
 			statementInfos.Add(s);
         }
 
+
 		blockInfo[blockId] = new BlockInfo(statementInfos);
+
+		int closeBraceLineNo = GetLine(node.CloseBraceToken.Span);
+		blockInfo[blockId].CloseBraceLineNo = closeBraceLineNo;
+
         blockId++;
         base.VisitBlock(node);
     }

@@ -39,6 +39,7 @@ namespace VarStateHooksInjectorTests
             codeRunnerInfo.IsConstructor = false;
             
 			codeRunnerInfo.blockInfo[0] = new BlockInfo();
+			codeRunnerInfo.blockInfo[0].CloseBraceLineNo = 7;
             StatementInfo sInfo = new StatementInfo();
 			sInfo = new StatementInfo { LineNo = 5 };
             codeRunnerInfo.blockInfo[0].Add(sInfo);
@@ -57,6 +58,7 @@ namespace VarStateHooksInjectorTests
 				"0",
 				"LogLineRun()",
 				"1",
+				"LogLineRun()",
             };
 
 			List<string> expectedStatementSubStrings = new List<string>(){
@@ -76,7 +78,7 @@ namespace VarStateHooksInjectorTests
 				Code = testMethod,
 				ClassInfo = classInfo,
 				ExpectedStatements = expectedStatementSubStrings,
-                ExpectedStatementCount = 5,
+                ExpectedStatementCount = 6,
 				Node = methSyntax,
 				RenderInfo = renderingInfo,
                 Root = root,
@@ -109,7 +111,9 @@ namespace VarStateHooksInjectorTests
             codeRunnerInfo.IsConstructor = false;
             
 			codeRunnerInfo.blockInfo[0] = new BlockInfo();
+			codeRunnerInfo.blockInfo[0].CloseBraceLineNo = 9;
 			codeRunnerInfo.blockInfo[1] = new BlockInfo();
+			codeRunnerInfo.blockInfo[1].CloseBraceLineNo = 10;
             StatementInfo sInfo = new StatementInfo();
 			sInfo = new StatementInfo { LineNo = 5 };
             codeRunnerInfo.blockInfo[0].Add(sInfo);
@@ -131,8 +135,10 @@ namespace VarStateHooksInjectorTests
                 "int b",
                 "LogLineRun",
                 "if(true)",
+				"LogLineRun",
                 "LogLineRun",
                 "int count",
+				"LogLineRun",
             };
 
             return new TestCase
@@ -140,7 +146,7 @@ namespace VarStateHooksInjectorTests
                 Code = testMethod,
                 ClassInfo = classInfo,
                 ExpectedStatements = expectedStatementSubStrings,
-                ExpectedStatementCount = 7,
+                ExpectedStatementCount = 9,
                 Node = methSyntax,
                 Root = root,
 				CSFileInfo = cSfileInfo,

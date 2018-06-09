@@ -6,6 +6,7 @@ namespace VarStateHooksInjector.Entities
     public class BlockInfo
     {
 		public List<StatementInfo> StatementInfos = new List<StatementInfo>() { };
+		public int CloseBraceLineNo = -1;
 
         public BlockInfo()
         {

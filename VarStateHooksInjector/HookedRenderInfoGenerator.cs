@@ -34,6 +34,14 @@ namespace VarStateHooksInjector
 					info.renderingInfo[blockid].Add(likeHook);
 					info.renderingInfo[blockid].Add(i.ToString());
 				}
+
+                // Add line hook for close brace of the block
+				int closeLineNo = methodInfo.blockInfo[blockid].CloseBraceLineNo;
+				if(closeLineNo != -1)
+				{
+					string closeBraceStr = HookTemplates.LineExecHook(closeLineNo, "");
+                    info.renderingInfo[blockid].Add(closeBraceStr);
+				}
 			}
 
 			return info;
