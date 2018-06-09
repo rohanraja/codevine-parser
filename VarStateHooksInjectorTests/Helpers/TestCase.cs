@@ -19,11 +19,6 @@ namespace VarStateHooksInjectorTests
 		public string FileName { get; private set; }
 		public CSfileInfo CSFileInfo { get; private set; }
 
-		public TestCase()
-        {
-        }
-
-
 		public static TestCase GetSimple2LineMethodCase()
 		{
 			string testMethod = @""" 
