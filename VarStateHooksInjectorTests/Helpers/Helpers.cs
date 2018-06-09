@@ -17,17 +17,25 @@ namespace VarStateHooksInjectorTests
         {
         }
 
+        internal static T GetFirstNodeOfType<T>(string code)
+		{
+			var root = SyntaxFactory.ParseSyntaxTree(code).GetRoot();
+            var meth = from methodDeclaration in root.DescendantNodes()
+                                                    .OfType<T>()
+                       select methodDeclaration;
+            return meth.First();
+            
+		}
 		internal static MethodDeclarationSyntax GetFirstMethodSyntax(string testMethod)
 		{
-			var root = SyntaxFactory.ParseSyntaxTree(testMethod).GetRoot();
-			var meth = from methodDeclaration in root.DescendantNodes()
-                                                    .OfType<MethodDeclarationSyntax>()
-                                                      select methodDeclaration;
-			return meth.First();
-
-   //         MethodDeclarationSyntax methSyntax = rt.ChildThatContainsPosition(0).AsNode() as MethodDeclarationSyntax;
-			//return methSyntax;
+			return GetFirstNodeOfType<MethodDeclarationSyntax>(testMethod);
 		}
+
+		internal static ClassDeclarationSyntax GetFirstClassSyntax(string testMethod)
+        {
+			return GetFirstNodeOfType<ClassDeclarationSyntax>(testMethod);
+        }
+
 
 		internal static void RunBlockRenderTest(string testMethod, int expectedStatementCount, List<string> expectedStatementSubStrings)
         {
