@@ -15,6 +15,8 @@ namespace VarStateHooksInjectorTests
 		{
 			HookedRenderInfoGenerator generator = new HookedRenderInfoGenerator();
 			ClassInfo classInfo = FactoryHelper.CreateClassInfo();
+			CodeRunnerInfo codeRunnerInfo = FactoryHelper.GenerateCodeRunnerInfo();
+            classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
             int id = 0;
 
             CodeRunBlockRenderingInfo renderInfo = generator.CodeRunBlockRenderInfoForMethod(classInfo, id);

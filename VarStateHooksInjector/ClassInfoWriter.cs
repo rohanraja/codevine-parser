@@ -14,15 +14,21 @@ namespace VarStateHooksInjector
 		int codeRunnerIds = 0;
 		private CSfileInfo cSfileInfo;
 
-		internal SyntaxNode Generate(ClassDeclarationSyntax node, int id)
+		public SyntaxNode Generate(ClassDeclarationSyntax node, int id)
         {
-			classInfo = cSfileInfo.GetClassInfo(id);
+			if(cSfileInfo != null)
+    			classInfo = cSfileInfo.GetClassInfo(id);
 			return this.Visit(node);
         }
 
 		public ClassInfoWriter(CSfileInfo cSfileInfo)
 		{
 			this.cSfileInfo = cSfileInfo;
+		}
+
+		public ClassInfoWriter(ClassInfo classInfo)
+		{
+			this.classInfo = classInfo;
 		}
 
 		public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)

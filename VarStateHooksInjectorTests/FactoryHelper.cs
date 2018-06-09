@@ -13,25 +13,25 @@ namespace VarStateHooksInjectorTests
 			ClassInfo classInfo = new ClassInfo();
 			classInfo.RelativeFilePath = "TestFile.cs";
 
-			CodeRunnerInfo codeRunnerInfo = GenerateCodeRunnerInfo();
-
-			classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
-
 			return classInfo;
         }
 
-		public static CodeRunnerInfo GenerateCodeRunnerInfo()
+		public static CodeRunnerInfo GenerateCodeRunnerInfo(int numStatements=1)
 		{
             
 			CodeRunnerInfo info = new CodeRunnerInfo();
 			info.Name = "TestMethod";
 			info.IsConstructor = false;
 
-			StatementInfo sInfo = new StatementInfo();
-			sInfo.LineNo = 9;
-
 			info.blockInfo[0] = new List<StatementInfo>() { };
-			info.blockInfo[0].Add(sInfo);
+
+			for (int i = 0; i < numStatements; i++)
+			{
+                StatementInfo sInfo = new StatementInfo();
+                sInfo.LineNo = 9+i;
+                
+                info.blockInfo[0].Add(sInfo);
+			}
 
 			return info;
 		}

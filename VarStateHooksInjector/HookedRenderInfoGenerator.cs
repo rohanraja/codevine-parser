@@ -41,7 +41,7 @@ namespace VarStateHooksInjector
 
 		public CodeRunBlockRenderingInfo CodeRunBlockRenderInfoForConstructor(ClassInfo classInfo, int id)
 		{
-			throw new NotImplementedException();
+			return CodeRunBlockRenderInfoForMethod(classInfo, id);
 		}
 	}
 }
