@@ -20,10 +20,12 @@ namespace VarStateHooksInjector
 		{
 			int id = classIds;
 			ClassInfoWriter writer = new ClassInfoWriter(cSfileInfo);
-			classIds++;
 			var newClassNode = writer.Generate(node, id) as ClassDeclarationSyntax;
+			var newProps = HookedProperties(id);
 
-			return newClassNode.WithMembers(newClassNode.Members);
+			classIds++;
+
+			return newClassNode.WithMembers(newClassNode.Members.AddRange(newProps));
 		}
 
 		public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)
@@ -33,5 +35,20 @@ namespace VarStateHooksInjector
             var newUsings = node.Usings.Add(usng);
             return ((CompilationUnitSyntax)doneNode).WithUsings(newUsings);
         }
+
+		private SyntaxList<MemberDeclarationSyntax> HookedProperties(int id)
+		{
+			SyntaxList<MemberDeclarationSyntax> outp = new SyntaxList<MemberDeclarationSyntax>();
+
+			PropertyWithValueListenerGen gen = new PropertyWithValueListenerGen();
+			var classInfo = cSfileInfo.GetClassInfo(id);
+			foreach(var key in classInfo.FieldInfos.Keys)
+			{
+				var finfo = classInfo.FieldInfos[key];
+				var newProp = gen.GenerateProperty(finfo);
+				outp = outp.Add(newProp);
+			}
+			return outp;
+		}
 	}
 }

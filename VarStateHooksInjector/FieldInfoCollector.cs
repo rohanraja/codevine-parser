@@ -15,6 +15,8 @@ namespace VarStateHooksInjector
     		//throw new NotImplementedException();
     		var finfo = new FieldInfo();
 			finfo.Name = node.Declaration.Variables[0].Identifier.ToString();
+			finfo.Type = node.Declaration.Type;
+			finfo.Modifiers = node.Modifiers;
 			return finfo;
     	}
     }

@@ -164,6 +164,19 @@ namespace VarStateHooksInjectorTests
                 void MethodA()
                 {
                 }
+                
+                public int fieldProp
+                {
+                    get
+                    {
+                        return field1;
+                    }
+                    set
+                    {
+                        field1 = value;
+                    }
+
+                }
             }
             """;
 			return new TestCase

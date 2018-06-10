@@ -1,7 +1,13 @@
-﻿namespace VarStateHooksInjector.Entities
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+namespace VarStateHooksInjector.Entities
 {
-    public class FieldInfo
-    {
-        public string Name;
-    }
+	public class FieldInfo
+	{
+		public string Name;
+
+		public SyntaxTokenList Modifiers ;
+		public TypeSyntax Type;
+	}
 }
