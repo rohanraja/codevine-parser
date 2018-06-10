@@ -13,11 +13,11 @@ namespace CodePraser
         {
             string prdata = sourceCodeInfo.GetContentsOfFileAtRoot(projectFileName);
 
-            string prPath = @"/Users/rohan/code/codevine_parser/CodeVine_Parser/CodeRecordHelpers/CodeRecordHelpers.csproj";
+			string prPath = @"/Users/rohan/code/codevine-recorder/CodeVineRecorder/CodeVineRecorder.csproj";
 
             string replaceData = string.Format("<ItemGroup><ProjectReference Include=\"{0}\" /></ItemGroup></Project>", prPath);
 
-			var replacedStr = prdata.Replace("</Project>", CODEVINE_REFERENCE_STR);
+			var replacedStr = prdata.Replace("</Project>", replaceData);
 
             sourceCodeInfo.SetContentsOfFileAtRoot(projectFileName, replacedStr);
         }
