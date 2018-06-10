@@ -14,7 +14,7 @@ namespace VarStateHooksInjector
         {
         }
 
-		public PropertyDeclarationSyntax GenerateProperty(FieldInfo fieldInfo)
+		public PropertyDeclarationSyntax GenerateProperty(FieldInfo fieldInfo, string clsName = "")
 		{
 			var identifier = SyntaxFactory.Identifier(fieldInfo.Name);
 
@@ -22,8 +22,10 @@ namespace VarStateHooksInjector
 
 			string cvname = FieldGenerator.GetPrefixedName(fieldInfo.Name);
 
+			string hookexpr = HookTemplates.FieldUpdateHook(fieldInfo.Name, clsName, "value");
+
 			accessors = accessors.Add(SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration, GetAccessorBody(cvname)));
-			accessors = accessors.Add(SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration, SetAccessorBody(cvname)));
+			accessors = accessors.Add(SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration, SetAccessorBody(cvname, hookexpr)));
 
 			var accessList = SyntaxFactory.AccessorList(accessors);
 
@@ -53,16 +55,18 @@ namespace VarStateHooksInjector
 			return outp;
 		}
 
-		BlockSyntax SetAccessorBody(string varName)
+		BlockSyntax SetAccessorBody(string varName, string hookexpr)
         {
             string code = @""" 
             int Prop{
                 set{
+                {1}
                 {0} = value;
                 }
             }
         """;
 			code = code.Replace("{0}", varName);
+			code = code.Replace("{1}", hookexpr);
 
             BlockSyntax outp = GetFirstNodeOfType<BlockSyntax>(code);
             return outp;

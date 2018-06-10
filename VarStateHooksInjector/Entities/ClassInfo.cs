@@ -9,7 +9,9 @@ namespace VarStateHooksInjector.Entities
 		public Dictionary<int, FieldInfo> FieldInfos = new Dictionary<int, FieldInfo>() { };
 
 		public string RelativeFilePath;
+        public string Name;
 
+     
 		public ClassInfo()
         {
         }

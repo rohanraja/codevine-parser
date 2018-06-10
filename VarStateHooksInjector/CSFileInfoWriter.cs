@@ -45,7 +45,10 @@ namespace VarStateHooksInjector
 			foreach(var key in classInfo.FieldInfos.Keys)
 			{
 				var finfo = classInfo.FieldInfos[key];
-				var newProp = gen.GenerateProperty(finfo);
+
+                // Todo - fix sending classInfo name directly to prop gen
+				var newProp = gen.GenerateProperty(finfo, classInfo.Name);
+
 				outp = outp.Add(newProp);
 			}
 			return outp;
