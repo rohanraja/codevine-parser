@@ -17,6 +17,7 @@ namespace VarStateHooksInjector
 		public ClassInfo Collect(ClassDeclarationSyntax node)
 		{
 			this.Visit(node);
+			CollectedClassInfo.Name = node.Identifier.ToString();
 			return CollectedClassInfo;
 		}
 

@@ -23,6 +23,19 @@ namespace VarStateHooksInjector
 				info.renderingInfo[0] = new List<string>() { };
 			info.renderingInfo[0].Add(methodStr);
 
+
+            // Add Field Initial Value Update Hooks
+            if(methodInfo.IsConstructor)
+            {
+                foreach(var finfo in classInfo.FieldInfos.Values)
+                {
+                    string hookexpr = HookTemplates.FieldUpdateHook(finfo.Name, classInfo.Name, FieldGenerator.GetPrefixedName(finfo.Name));
+                    info.renderingInfo[0].Add(hookexpr);
+                }
+                
+            }
+
+
             // Add LineExecHooks
 			foreach(int blockid in methodInfo.blockInfo.Keys)
 			{
