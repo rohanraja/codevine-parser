@@ -17,7 +17,7 @@ namespace CodePraser
 
             string replaceData = string.Format("<ItemGroup><ProjectReference Include=\"{0}\" /></ItemGroup></Project>", prPath);
 
-			var replacedStr = prdata.Replace("</Project>", CODEVINE_REFERENCE_STR);
+			var replacedStr = prdata.Replace("</Project>", replaceData);
 
             sourceCodeInfo.SetContentsOfFileAtRoot(projectFileName, replacedStr);
         }

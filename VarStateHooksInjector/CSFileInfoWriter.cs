@@ -21,6 +21,7 @@ namespace VarStateHooksInjector
 			int id = classIds;
 			ClassInfoWriter writer = new ClassInfoWriter(cSfileInfo);
 			var newClassNode = writer.Generate(node, id) as ClassDeclarationSyntax;
+
 			var newProps = HookedProperties(id);
 
 			classIds++;
@@ -40,6 +41,9 @@ namespace VarStateHooksInjector
 		{
 			SyntaxList<MemberDeclarationSyntax> outp = new SyntaxList<MemberDeclarationSyntax>();
 
+			if (!shouldAddFieldHookProperties())
+                return outp;
+
 			PropertyWithValueListenerGen gen = new PropertyWithValueListenerGen();
 			var classInfo = cSfileInfo.GetClassInfo(id);
 			foreach(var key in classInfo.FieldInfos.Keys)
@@ -52,6 +56,11 @@ namespace VarStateHooksInjector
 				outp = outp.AddRange(newProp);
 			}
 			return outp;
+		}
+
+		private bool shouldAddFieldHookProperties()
+		{
+			return true;
 		}
 	}
 }
