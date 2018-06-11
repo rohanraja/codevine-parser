@@ -90,6 +90,22 @@ namespace VarStateHooksInjector
             return outp;
         }
 
+		public MemberDeclarationSyntax GetCodeVineClrIdFieldSyntax()
+		{
+			string code = @""" 
+            class dummy{
+                public int CodeVine_ClrInstanceId{
+                    get{
+                        return this.GetHashCode();
+                    }
+                }
+           } 
+            """;
+
+			var outp = GetFirstNodeOfType<PropertyDeclarationSyntax>(code);
+			return outp;
+		}
+
 		internal static T GetFirstNodeOfType<T>(string code)
         {
             var root = SyntaxFactory.ParseSyntaxTree(code).GetRoot();

@@ -41,10 +41,15 @@ namespace VarStateHooksInjector
 		{
 			SyntaxList<MemberDeclarationSyntax> outp = new SyntaxList<MemberDeclarationSyntax>();
 
+			PropertyWithValueListenerGen gen = new PropertyWithValueListenerGen();
+
+            // Add clr class instance id property
+            if (shouldAddClrClassInstaceProp())
+                outp = outp.Add(gen.GetCodeVineClrIdFieldSyntax());
+
 			if (!shouldAddFieldHookProperties())
                 return outp;
 
-			PropertyWithValueListenerGen gen = new PropertyWithValueListenerGen();
 			var classInfo = cSfileInfo.GetClassInfo(id);
 			foreach(var key in classInfo.FieldInfos.Keys)
 			{
@@ -55,7 +60,13 @@ namespace VarStateHooksInjector
 
 				outp = outp.AddRange(newProp);
 			}
+
 			return outp;
+		}
+
+		private bool shouldAddClrClassInstaceProp()
+		{
+			return true;
 		}
 
 		private bool shouldAddFieldHookProperties()

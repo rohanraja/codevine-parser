@@ -30,5 +30,19 @@ namespace VarStateHooksInjectorTests
 			Assert.IsTrue(getter.Body.Statements[0].GetText().ToString().Contains(fieldInfo.Names[0]));
         }
 
+		[TestMethod]
+		public void TestCodeVinePropertyGeneration()
+		{
+			var gen = new PropertyWithValueListenerGen();
+			var fieldSyntax = gen.GetCodeVineClrIdFieldSyntax();
+
+			string txt = fieldSyntax.GetText().ToString();
+			Assert.IsTrue(txt.Contains("GetHashCode"));
+			Assert.IsTrue(txt.Contains("CodeVine"));
+			Assert.IsTrue(txt.Contains("int"));
+			Assert.IsTrue(txt.Contains("public"));
+
+		}
+
 	}
 }
