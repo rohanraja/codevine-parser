@@ -5,7 +5,7 @@ namespace CodePraser
 {
 	public class MacDevReferenceInjector : IProjectReferenceInjector
 	{
-        private static string CODEVINE_REFERENCE_STR = @"<ItemGroup><PackageReference Include=""CodeVineRecorder"" Version=""1.0.6"" /></ItemGroup></Project>";
+        private static string CODEVINE_REFERENCE_STR = @"<ItemGroup><PackageReference Include=""CodeVineRecorder"" Version=""1.0.10"" /></ItemGroup></Project>";
 
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -17,7 +17,7 @@ namespace CodePraser
 
             string replaceData = string.Format("<ItemGroup><ProjectReference Include=\"{0}\" /></ItemGroup></Project>", prPath);
 
-			var replacedStr = prdata.Replace("</Project>", replaceData);
+			var replacedStr = prdata.Replace("</Project>", CODEVINE_REFERENCE_STR);
 
             sourceCodeInfo.SetContentsOfFileAtRoot(projectFileName, replacedStr);
         }

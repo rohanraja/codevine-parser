@@ -29,8 +29,11 @@ namespace VarStateHooksInjector
             {
                 foreach(var finfo in classInfo.FieldInfos.Values)
                 {
-                    string hookexpr = HookTemplates.FieldUpdateHook(finfo.Name, classInfo.Name, FieldGenerator.GetPrefixedName(finfo.Name));
-                    info.renderingInfo[0].Add(hookexpr);
+					foreach (var fname in finfo.Names)
+					{
+						string hookexpr = HookTemplates.FieldUpdateHook(fname, classInfo.Name, FieldGenerator.GetPrefixedName(fname));
+                        info.renderingInfo[0].Add(hookexpr);
+					}
                 }
                 
             }

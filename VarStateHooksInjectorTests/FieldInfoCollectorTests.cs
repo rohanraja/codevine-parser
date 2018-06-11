@@ -22,7 +22,7 @@ namespace VarStateHooksInjectorTests
 			var fieldNode = Helpers.GetFirstNodeOfType<FieldDeclarationSyntax>(testCase.Code);
 			FieldInfoCollector fieldInfoCollector = new FieldInfoCollector();
 			var finfo = fieldInfoCollector.Collect(fieldNode);
-			Assert.IsTrue(finfo.Name == "field1");
+			Assert.IsTrue(finfo.Names[0] == "field1");
 			Assert.IsNotNull(finfo.Type);
 			Assert.IsNotNull(finfo.Modifiers);
 		}
