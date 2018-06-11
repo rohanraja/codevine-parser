@@ -49,7 +49,7 @@ namespace VarStateHooksInjector
                 // Todo - fix sending classInfo name directly to prop gen
 				var newProp = gen.GenerateProperty(finfo, classInfo.Name);
 
-				outp = outp.Add(newProp);
+				outp = outp.AddRange(newProp);
 			}
 			return outp;
 		}

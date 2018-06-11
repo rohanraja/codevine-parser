@@ -14,7 +14,12 @@ namespace VarStateHooksInjector
     	{
     		//throw new NotImplementedException();
     		var finfo = new FieldInfo();
-			finfo.Name = node.Declaration.Variables[0].Identifier.ToString();
+			foreach(var var in node.Declaration.Variables)
+			{
+				string fname = var.Identifier.ToString();
+				finfo.Names.Add(fname);
+				
+			}
 			finfo.Type = node.Declaration.Type;
 			finfo.Modifiers = node.Modifiers;
 			return finfo;

@@ -14,15 +14,27 @@ namespace VarStateHooksInjector
         {
         }
 
-		public PropertyDeclarationSyntax GenerateProperty(FieldInfo fieldInfo, string clsName = "")
+		public SyntaxList<PropertyDeclarationSyntax> GenerateProperty(FieldInfo fieldInfo, string clsName = "")
 		{
-			var identifier = SyntaxFactory.Identifier(fieldInfo.Name);
+			var outP = new SyntaxList<PropertyDeclarationSyntax>() { };
+			foreach(var fieldName in fieldInfo.Names)
+			{
+				outP = outP.Add(GeneratePropertyForName(fieldInfo, fieldName, clsName));
+				
+			}
+			return outP;
+
+		}
+
+		public PropertyDeclarationSyntax GeneratePropertyForName(FieldInfo fieldInfo, string fieldName, string clsName = "")
+		{
+			var identifier = SyntaxFactory.Identifier(fieldName);
 
 			SyntaxList<AccessorDeclarationSyntax> accessors = new SyntaxList<AccessorDeclarationSyntax>() { };
 
-			string cvname = FieldGenerator.GetPrefixedName(fieldInfo.Name);
+			string cvname = FieldGenerator.GetPrefixedName(fieldName);
 
-			string hookexpr = HookTemplates.FieldUpdateHook(fieldInfo.Name, clsName, "value");
+			string hookexpr = HookTemplates.FieldUpdateHook(fieldName, clsName, "value");
 
 			accessors = accessors.Add(SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration, GetAccessorBody(cvname)));
 			accessors = accessors.Add(SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration, SetAccessorBody(cvname, hookexpr)));

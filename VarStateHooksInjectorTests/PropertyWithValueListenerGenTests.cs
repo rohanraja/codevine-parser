@@ -19,15 +19,15 @@ namespace VarStateHooksInjectorTests
             var gen = new PropertyWithValueListenerGen();
 
             FieldInfo fieldInfo = new FieldInfo();
-			fieldInfo.Name = "field1";
+			fieldInfo.Names.Add("field1");
 
 			fieldInfo.Type = fieldNode.Declaration.Type;
 			fieldInfo.Modifiers = fieldNode.Modifiers;
 
             var PropNode = gen.GenerateProperty(fieldInfo);
 
-			var getter = Helpers.GetFirstNodeOfType<AccessorDeclarationSyntax>(PropNode);
-			Assert.IsTrue(getter.Body.Statements[0].GetText().ToString().Contains(fieldInfo.Name));
+			var getter = Helpers.GetFirstNodeOfType<AccessorDeclarationSyntax>(PropNode[0]);
+			Assert.IsTrue(getter.Body.Statements[0].GetText().ToString().Contains(fieldInfo.Names[0]));
         }
 
 	}
