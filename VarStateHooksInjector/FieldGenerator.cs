@@ -23,7 +23,7 @@ namespace VarStateHooksInjector
 		public FieldDeclarationSyntax Generate(FieldDeclarationSyntax node, int id)
 		{
             // Prevent hooking static and abstract fields
-			if (!FieldInfo.ShouldBeHooked(node))
+			if (!FieldInfo.ShouldBeHooked(node) || !shouldHookFieldUpdates())
 				return node;
 			
 			var VarDecs = node.Declaration.Variables;
@@ -36,6 +36,11 @@ namespace VarStateHooksInjector
 				newVars = newVars.Add(Vardec.WithIdentifier(newId));
 			}
 			return node.WithDeclaration(node.Declaration.WithVariables(newVars));
+		}
+
+		private bool shouldHookFieldUpdates()
+		{
+			return true;
 		}
 	}
 }

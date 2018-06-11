@@ -19,7 +19,7 @@ namespace VarStateHooksInjector
 			var outP = new SyntaxList<PropertyDeclarationSyntax>() { };
             
 			// Ignore for static and abstract fields
-			if (!fieldInfo.ShouldBeHooked())
+			if (!fieldInfo.ShouldBeHooked() || !shouldHookFieldUpdates())
 				return outP;
 			
 			foreach(var fieldName in fieldInfo.Names)
@@ -30,6 +30,7 @@ namespace VarStateHooksInjector
 			return outP;
 
 		}
+
 
 		public PropertyDeclarationSyntax GeneratePropertyForName(FieldInfo fieldInfo, string fieldName, string clsName = "")
 		{
@@ -102,6 +103,11 @@ namespace VarStateHooksInjector
                                                     .OfType<T>()
                        select methodDeclaration;
             return meth.First();
+        }
+
+		private bool shouldHookFieldUpdates()
+        {
+            return true;
         }
     }
 }
