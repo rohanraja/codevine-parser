@@ -19,7 +19,9 @@ namespace VarStateHooksInjectorTests
 		public Dictionary<int, List<string>> RenderInfo { get; private set; }
 		public SyntaxTree Root { get; internal set; }
 		public string FileName { get; private set; }
-		public CSfileInfo CSFileInfo { get; private set; }
+
+
+      		public CSfileInfo CSFileInfo { get; private set; }
 
 		public static TestCase GetSimple2LineMethodCase()
 		{
@@ -184,5 +186,35 @@ namespace VarStateHooksInjectorTests
                 Code = testMethod,
             };
         }
+
+		internal static TestCase GetClassWithStaticIntField()
+        {
+			string testMethod = @""" 
+            class TestClass
+            {
+                private static int field1 = 50;
+                void MethodA()
+                {
+                }
+                
+                public int fieldProp
+                {
+                    get
+                    {
+                        return field1;
+                    }
+                    set
+                    {
+                        field1 = value;
+                    }
+
+                }
+            }
+            """;
+            return new TestCase
+            {
+                Code = testMethod,
+            };        
+		}
     }
 }

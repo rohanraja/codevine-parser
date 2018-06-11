@@ -19,9 +19,13 @@ namespace VarStateHooksInjector
 		{
 			this.classInfo = classInfo;
 		}
-
+        
 		public FieldDeclarationSyntax Generate(FieldDeclarationSyntax node, int id)
 		{
+            // Prevent hooking static and abstract fields
+			if (!FieldInfo.ShouldBeHooked(node))
+				return node;
+			
 			var VarDecs = node.Declaration.Variables;
 			Microsoft.CodeAnalysis.SeparatedSyntaxList<VariableDeclaratorSyntax> newVars = default(Microsoft.CodeAnalysis.SeparatedSyntaxList<VariableDeclaratorSyntax>);
 

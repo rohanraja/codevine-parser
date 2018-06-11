@@ -17,6 +17,11 @@ namespace VarStateHooksInjector
 		public SyntaxList<PropertyDeclarationSyntax> GenerateProperty(FieldInfo fieldInfo, string clsName = "")
 		{
 			var outP = new SyntaxList<PropertyDeclarationSyntax>() { };
+            
+			// Ignore for static and abstract fields
+			if (!fieldInfo.ShouldBeHooked())
+				return outP;
+			
 			foreach(var fieldName in fieldInfo.Names)
 			{
 				outP = outP.Add(GeneratePropertyForName(fieldInfo, fieldName, clsName));

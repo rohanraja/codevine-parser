@@ -14,10 +14,19 @@ namespace VarStateHooksInjectorTests
         public void TestSimpleIntField()
         {
             TestCase testCase = TestCase.GetClassWithIntField();
-            RunFieldCollectorTest(testCase);
+			var finfo = RunFieldCollectorTest(testCase);
+			Assert.IsFalse(finfo.IsStatic);
         }
 
-		private void RunFieldCollectorTest(TestCase testCase)
+		[TestMethod]
+        public void TestStaticFieldIsIgnored()
+        {
+            TestCase testCase = TestCase.GetClassWithStaticIntField();
+            var finfo = RunFieldCollectorTest(testCase);
+			Assert.IsTrue(finfo.IsStatic);
+        }
+
+		private FieldInfo RunFieldCollectorTest(TestCase testCase)
 		{
 			var fieldNode = Helpers.GetFirstNodeOfType<FieldDeclarationSyntax>(testCase.Code);
 			FieldInfoCollector fieldInfoCollector = new FieldInfoCollector();
@@ -25,6 +34,7 @@ namespace VarStateHooksInjectorTests
 			Assert.IsTrue(finfo.Names[0] == "field1");
 			Assert.IsNotNull(finfo.Type);
 			Assert.IsNotNull(finfo.Modifiers);
+			return finfo;
 		}
 	}
 }

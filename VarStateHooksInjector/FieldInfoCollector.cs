@@ -22,6 +22,14 @@ namespace VarStateHooksInjector
 			}
 			finfo.Type = node.Declaration.Type;
 			finfo.Modifiers = node.Modifiers;
+			foreach(var mod in node.Modifiers)
+			{
+				if (mod.Text.ToLower().Contains("static"))
+					finfo.IsStatic = true;
+                
+				if (mod.Text.ToLower().Contains("abstract"))
+                    finfo.IsAbstract = true;
+			}
 			return finfo;
     	}
     }
