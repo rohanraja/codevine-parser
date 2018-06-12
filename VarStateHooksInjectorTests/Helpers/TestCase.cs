@@ -246,9 +246,30 @@ namespace VarStateHooksInjectorTests
                 }
             }
             """;
+			
+			ClassInfo classInfo = new ClassInfo();
+			CodeRunnerInfo codeRunnerInfo = new CodeRunnerInfo();
+
+			BlockInfo block = new BlockInfo();
+			StatementInfo s1 = new StatementInfo();
+			s1.IsLocalVarDeclaration = true;
+			block.StatementInfos.Add(s1);
+			s1.LocalVarNames.Add("localVar1");
+			s1.LineNo = 5;
+			StatementInfo s2 = new StatementInfo();
+			s2.IsLocalVarStateChanger = true;
+			s2.LocalVarNames.Add("localVar1");
+			block.StatementInfos.Add(s2);
+			s1.LineNo = 6;
+
+			codeRunnerInfo.blockInfo[0] = block;
+			classInfo.AddCodeRunnerInfo(codeRunnerInfo, 0);
+
+
             return new TestCase
             {
                 Code = testMethod,
+				ClassInfo = classInfo
             };        
         }
 		internal static TestCase GetLocalVarIncrementor()
