@@ -47,8 +47,27 @@ namespace VarStateHooksInjector
                 
             }
 
-
 			var localVarsList = new List<string>() { };
+
+            // Hook local var declarations for method argument
+			if(shouldHookLocalVarChange())
+			{
+				if (!info.renderingInfo.ContainsKey(0))
+                    info.renderingInfo[0] = new List<string>() { };
+
+				foreach(var arg in methodInfo.Arguments)
+				{
+					if(arg.Name != "")
+					{
+						localVarsList.Add(arg.Name);
+						string localHook = HookTemplates.LocalVarUpdateHook(arg.Name, "");
+                        info.renderingInfo[0].Add(localHook);
+
+					}
+				}
+				
+			}
+
 
             // Add LineExecHooks
 			foreach(int blockid in methodInfo.blockInfo.Keys)

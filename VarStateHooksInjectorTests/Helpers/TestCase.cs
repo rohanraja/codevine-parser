@@ -289,5 +289,31 @@ namespace VarStateHooksInjectorTests
                 Code = testMethod,
             };        
         }
+
+		internal static TestCase GetBlankMethodWithSingleArgument()
+		{
+			string testMethod = @""" 
+            class TestClass
+            {
+                void MethodA(int arg1)
+                {
+                }
+            }
+            """;
+
+			List<string> expectedStatementSubStrings = new List<string>(){
+                "OnMethodEnter",
+                "LocalVarUpdate",
+                "arg1",
+            };
+
+			return new TestCase
+            {
+                Code = testMethod,
+                ExpectedStatements = expectedStatementSubStrings,
+                ExpectedStatementCount = 3,
+                FileName = "testfile.cs"
+            };
+		}
     }
 }

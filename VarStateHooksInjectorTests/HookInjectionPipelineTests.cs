@@ -24,6 +24,13 @@ namespace VarStateHooksInjectorTests
             RunEndToEndHookInjection(testCase);
         }
 
+		[TestMethod]
+        public void TestForMethodArgumentLocalVarHooks()
+        {
+            TestCase testCase = TestCase.GetBlankMethodWithSingleArgument();
+            RunEndToEndHookInjection(testCase);
+        }
+
 		private void RunEndToEndHookInjection(TestCase testCase)
 		{
 			var fname = testCase.FileName;

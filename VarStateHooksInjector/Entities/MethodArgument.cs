@@ -2,5 +2,6 @@
 {
     public class MethodArgument
     {
+		public string Name = "";
     }
 }

@@ -11,5 +11,6 @@ namespace VarStateHooksInjector.Entities
 		public Dictionary<int, BlockInfo> blockInfo = new Dictionary<int, BlockInfo>() { };
        public bool IsConstructor;
 		public bool IsStatic = false;
+
     }
 }
