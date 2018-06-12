@@ -48,6 +48,8 @@ namespace VarStateHooksInjector
             }
 
 
+			var localVarsList = new List<string>() { };
+
             // Add LineExecHooks
 			foreach(int blockid in methodInfo.blockInfo.Keys)
 			{
@@ -62,7 +64,35 @@ namespace VarStateHooksInjector
     					info.renderingInfo[blockid].Add(likeHook);
 					}
 
+                    // Add the cue for the original statement
 					info.renderingInfo[blockid].Add(i.ToString());
+
+                    if(shouldHookLocalVarChange())
+					{
+						bool addLocalVarUpdater = false;
+
+						if(statInfo.IsLocalVarDeclaration)
+						{
+							localVarsList.AddRange(statInfo.LocalVarNames);
+							addLocalVarUpdater = true;
+						}
+
+						if (statInfo.IsLocalVarStateChanger)
+                        {
+							if(localVarsList.Contains(statInfo.LocalVarNames[0]))
+                                addLocalVarUpdater = true;
+                        }
+
+						if(addLocalVarUpdater)
+						{
+							foreach(string varName in statInfo.LocalVarNames)
+							{
+								string localHook = HookTemplates.LocalVarUpdateHook(varName, "");
+                                info.renderingInfo[blockid].Add(localHook);
+							}
+						}
+
+					}
 				}
 
                 // Add line hook for close brace of the block
@@ -75,6 +105,11 @@ namespace VarStateHooksInjector
 			}
 
 			return info;
+		}
+
+		private bool shouldHookLocalVarChange()
+		{
+			return true;
 		}
 
 		private bool shouldHookLineExec()

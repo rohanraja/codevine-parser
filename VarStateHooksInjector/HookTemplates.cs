@@ -21,5 +21,11 @@ namespace VarStateHooksInjector
 			string expr = string.Format("CodeHooks.Instance().SendFieldUpdate(this.GetHashCode(), \"{0}\", \"raw\", \"{1}\", {2}, CodeHooks.Now());\n\n", varName, className, cvVarName);
 			return expr;
         }
+
+		public static string LocalVarUpdateHook(string varName, string className="")
+        {
+			string expr = string.Format("CodeHooks.Instance().LocalVarUpdate(mrid, \"{0}\", \"{1}\", {2}, CodeHooks.Now());\n\n", varName, className, varName);
+            return expr;
+        }
     }
 }

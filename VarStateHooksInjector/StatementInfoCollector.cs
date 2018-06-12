@@ -45,6 +45,8 @@ namespace VarStateHooksInjector
 					idst = postExpr.Operand as IdentifierNameSyntax;
                 }
 
+                // Todo - Ensure there are no more cases for local var identification.
+
 				if (idst != null)
                 {
                     var name = idst.Identifier.ToString();
