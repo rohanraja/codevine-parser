@@ -32,7 +32,7 @@ public class BlockInfoCollector  : CSharpSyntaxWalker
 		{
 			var statement = node.Statements[i];
 			StatementInfo s = new StatementInfo();
-			s.LineNo = GetLine(node.Statements[i].Span);
+			s.LineNo = GetLine(statement.Span);
 			statementInfos.Add(s);
         }
 

@@ -216,5 +216,22 @@ namespace VarStateHooksInjectorTests
                 Code = testMethod,
             };        
 		}
+
+		internal static TestCase GetLocalVariableDecClass()
+        {
+			string testMethod = @""" 
+            class TestClass
+            {
+                void MethodA()
+                {
+                    int localVar1 = 99;
+                }
+            }
+            """;
+            return new TestCase
+            {
+                Code = testMethod,
+            };        
+        }
     }
 }
