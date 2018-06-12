@@ -25,7 +25,7 @@ namespace VarStateHooksInjector
 				if (!info.renderingInfo.ContainsKey(0))
                     info.renderingInfo[0] = new List<string>() { };
 
-    			string methodStr = HookTemplates.MethodEnterHook(classInfo.RelativeFilePath, methodInfo.Name);
+				string methodStr = HookTemplates.MethodEnterHook(classInfo.RelativeFilePath, methodInfo.Name, methodInfo.IsStatic);
     			info.renderingInfo[0].Add(methodStr);
 			}
 

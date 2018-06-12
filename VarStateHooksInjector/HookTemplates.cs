@@ -5,9 +5,10 @@ namespace VarStateHooksInjector
     public class HookTemplates
     {
 		// ToDo: Move these to a different static method class
-        public static string MethodEnterHook(string filePath, string methodName)
+        public static string MethodEnterHook(string filePath, string methodName, bool isStatic = false)
         {
-            string expr = string.Format("var mrid = CodeHooks.Instance().OnMethodEnter(@\"{0}\", \"{1}\");\n\n", filePath, methodName);
+			string clrIdExpr = isStatic == false ? "this.GetHashCode()" : "-1";
+			string expr = string.Format("var mrid = CodeHooks.Instance().OnMethodEnter(@\"{0}\", \"{1}\", {2} );\n\n", filePath, methodName, clrIdExpr);
             return expr;
         }
 

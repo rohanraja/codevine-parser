@@ -21,6 +21,12 @@ namespace VarStateHooksInjector{
     		info.IsConstructor = false;
     		BlockInfoCollector blockInfo = new BlockInfoCollector(root);
     		info.blockInfo = blockInfo.Collect(node.Body);
+            
+			foreach(var mod in node.Modifiers)
+            {
+                if (mod.Text.ToLower().Contains("static"))
+                    info.IsStatic = true;
+            }
 
             // Todo - Add method arguments to info
     		return info;
