@@ -91,6 +91,7 @@ namespace VarStateHooksInjectorTests
 			};
 		}
 
+
 		public static TestCase GetSingleIfMethod()
         {
 			string testMethod = @""" 
@@ -225,6 +226,40 @@ namespace VarStateHooksInjectorTests
                 void MethodA()
                 {
                     int localVar1 = 99;
+                }
+            }
+            """;
+            return new TestCase
+            {
+                Code = testMethod,
+            };        
+        }
+		internal static TestCase GetLocalVarAssignmentCode()
+        {
+			string testMethod = @""" 
+            class TestClass
+            {
+                void MethodA()
+                {
+                    int localVar1 = 99;
+                    localVar1 = 45;
+                }
+            }
+            """;
+            return new TestCase
+            {
+                Code = testMethod,
+            };        
+        }
+		internal static TestCase GetLocalVarIncrementor()
+        {
+			string testMethod = @""" 
+            class TestClass
+            {
+                void MethodA()
+                {
+                    int localVar1 = 99;
+                    localVar1++;
                 }
             }
             """;

@@ -27,6 +27,34 @@ namespace VarStateHooksInjector
 				return info;
 			}
 
+			var exprNode = node as ExpressionStatementSyntax;
+			if(exprNode != null)
+			{
+
+				IdentifierNameSyntax idst = null;
+
+				var expr = exprNode.Expression as AssignmentExpressionSyntax;
+                if(expr != null)
+				{
+                    idst = expr.Left as IdentifierNameSyntax;
+				}
+
+				var postExpr = exprNode.Expression as PostfixUnaryExpressionSyntax;
+				if (postExpr != null)
+                {
+					idst = postExpr.Operand as IdentifierNameSyntax;
+                }
+
+				if (idst != null)
+                {
+                    var name = idst.Identifier.ToString();
+                    info.LocalVarNames.Add(name);
+                    info.IsLocalVarStateChanger = true;
+
+                }
+                
+			}
+
 
 			return info;
     	}

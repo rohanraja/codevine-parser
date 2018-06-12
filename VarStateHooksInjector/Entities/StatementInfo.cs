@@ -6,9 +6,9 @@ namespace VarStateHooksInjector.Entities
 	{
 		public int LineNo;
 
-		public bool IsLocalVarDeclaration;
+		public bool IsLocalVarDeclaration = false;
 
-		public bool IsLovaVarStateChanger;
+		public bool IsLocalVarStateChanger = false;
 
 		public List<string> LocalVarNames = new List<string>() { };
 
